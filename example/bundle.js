@@ -14,6 +14,15 @@ var __extends$2 = (undefined && undefined.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (undefined && undefined.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+var ReactTransitionGroup = React.addons.TransitionGroup;
 var SlideIn = (function (_super) {
     __extends$2(SlideIn, _super);
     function SlideIn() {
@@ -21,11 +30,9 @@ var SlideIn = (function (_super) {
     }
     SlideIn.prototype.render = function () {
         var open = (this.props.children && React.Children.count(this.props.children) !== 0);
-        var classList = ['react-slidein'];
-        if (open)
-            classList.push('open');
-        return (React.createElement("div", { className: classList.join(' ') }, open &&
-            React.createElement(SlideInContent, null, this.props.children)));
+        var className = this.props.className ? 'react-slidein ' + this.props.className : 'react-slidein';
+        return (React.createElement(ReactTransitionGroup, __assign({ className: className, component: 'div' }, this.props), open &&
+            React.createElement(SlideInContent, { key: 'content' }, this.props.children)));
     };
     return SlideIn;
 }(React.Component));
@@ -34,36 +41,32 @@ var SlideInContent = (function (_super) {
     function SlideInContent() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.handleRef = function (element) {
-            if (element) {
-                var prevHeight = element.style.height;
-                element.style.height = 'auto';
-                var endHeight = getComputedStyle(element).height;
-                element.style.height = prevHeight;
-                element.offsetHeight;
-                element.style.transitionProperty = 'height';
-                element.style.height = endHeight;
-            }
-            else {
-                _this.element.style.height = getComputedStyle(_this.element).height;
-                _this.element.style.transitionProperty = 'height';
-                _this.element.offsetHeight;
-                _this.element.style.height = '0';
-            }
             _this.element = element;
         };
         _this.handleTransitionEnd = function (evt) {
-            console.log(evt.propertyName);
             if (evt.propertyName == 'height') {
                 _this.element.style.height = 'auto';
                 _this.element.style.transitionProperty = 'none';
+                _this.callback();
+                _this.callback = null;
             }
         };
         return _this;
     }
-    SlideInContent.prototype.componentWillUnmount = function () {
+    SlideInContent.prototype.componentWillEnter = function (callback) {
+        this.callback = callback;
+        var prevHeight = this.element.style.height;
+        this.element.style.height = 'auto';
+        var endHeight = getComputedStyle(this.element).height;
+        this.element.style.height = prevHeight;
+        this.element.offsetHeight;
+        this.element.style.transitionProperty = 'height';
+        this.element.style.height = endHeight;
+    };
+    SlideInContent.prototype.componentWillLeave = function (callback) {
+        this.callback = callback;
         this.element.style.height = getComputedStyle(this.element).height;
-        console.log('height', this.element.style.height);
-        this.element.style.transition = 'height .5s ease-in-out';
+        this.element.style.transitionProperty = 'height';
         this.element.offsetHeight;
         this.element.style.height = '0';
     };
@@ -91,7 +94,7 @@ var Dropdown = (function (_super) {
     Dropdown.prototype.render = function () {
         return (React.createElement("div", { className: 'dropdown-container' },
             React.createElement("span", null, this.props.open ? 'Open' : 'Closed'),
-            React.createElement(SlideIn, null, this.props.open && this.renderList())));
+            React.createElement(SlideIn, { className: 'dropdown-slidein' }, this.props.open && this.renderList())));
     };
     Dropdown.prototype.renderList = function () {
         var count = Math.trunc(Math.random() * this.props.maxItems) + 5;

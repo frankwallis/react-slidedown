@@ -12,3 +12,7 @@
     padding: 0;
     list-style: none;
 }
+
+.dropdown-slidein {
+    position: fixed;
+}

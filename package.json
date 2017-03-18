@@ -13,5 +13,8 @@
   "devDependencies": {
     "rollup": "^0.41.6",
     "typescript": "^2.2.1"
+  },
+  "dependencies": {
+    "react-addons-transition-group": "^15.4.2"
   }
 }

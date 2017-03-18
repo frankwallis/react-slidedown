@@ -6,7 +6,7 @@ export default class Dropdown extends React.Component {
         return (
             <div className={'dropdown-container'}>
                 <span>{this.props.open ? 'Open' : 'Closed'}</span>
-                <SlideIn>
+                <SlideIn className={'dropdown-slidein'}>
                     {this.props.open && this.renderList()}
                 </SlideIn>
             </div>
