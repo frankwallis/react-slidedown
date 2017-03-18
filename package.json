@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -p ./example && rollup --format iife -- tmp/example/index.js > example/bundle.js",
-    "start": "live-server --open=./example"
+    "build-example": "tsc -p ./example && rollup --format iife -- tmp/example/index.js > example/bundle.js",
+    "start-example": "live-server --open=./example",
+    "start": "npm run build-example && npm run start-example"
   },
   "author": "Frank Wallis",
   "license": "MIT",
