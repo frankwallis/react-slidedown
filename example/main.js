@@ -24,7 +24,9 @@ export default class Main extends React.Component {
     renderColumn(maxItems) {
         return (
             <div className={'main-column'}>
+                <span>I am above</span>
                 <Dropdown maxItems={maxItems} open={this.state.open} />
+                <span>I am below</span>
             </div>
         )
     }

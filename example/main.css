@@ -6,3 +6,9 @@
 .main-column {
     flex: 1 1 auto;
 }
+
+.dropdown-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}

@@ -20,11 +20,57 @@ var SlideIn = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     SlideIn.prototype.render = function () {
-        console.log(React.Children.count(this.props.children));
-        return (React.createElement("div", { className: 'react-slidein-wrapper' },
-            React.createElement("div", { className: 'react-slidein-content' }, this.props.children)));
+        var open = (this.props.children && React.Children.count(this.props.children) !== 0);
+        var classList = ['react-slidein'];
+        if (open)
+            classList.push('open');
+        return (React.createElement("div", { className: classList.join(' ') }, open &&
+            React.createElement(SlideInContent, null, this.props.children)));
     };
     return SlideIn;
+}(React.Component));
+var SlideInContent = (function (_super) {
+    __extends$2(SlideInContent, _super);
+    function SlideInContent() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.handleRef = function (element) {
+            if (element) {
+                var prevHeight = element.style.height;
+                element.style.height = 'auto';
+                var endHeight = getComputedStyle(element).height;
+                element.style.height = prevHeight;
+                element.offsetHeight;
+                element.style.transitionProperty = 'height';
+                element.style.height = endHeight;
+            }
+            else {
+                _this.element.style.height = getComputedStyle(_this.element).height;
+                _this.element.style.transitionProperty = 'height';
+                _this.element.offsetHeight;
+                _this.element.style.height = '0';
+            }
+            _this.element = element;
+        };
+        _this.handleTransitionEnd = function (evt) {
+            console.log(evt.propertyName);
+            if (evt.propertyName == 'height') {
+                _this.element.style.height = 'auto';
+                _this.element.style.transitionProperty = 'none';
+            }
+        };
+        return _this;
+    }
+    SlideInContent.prototype.componentWillUnmount = function () {
+        this.element.style.height = getComputedStyle(this.element).height;
+        console.log('height', this.element.style.height);
+        this.element.style.transition = 'height .5s ease-in-out';
+        this.element.offsetHeight;
+        this.element.style.height = '0';
+    };
+    SlideInContent.prototype.render = function () {
+        return (React.createElement("div", { className: 'react-slidein-content', ref: this.handleRef, onTransitionEnd: this.handleTransitionEnd }, this.props.children));
+    };
+    return SlideInContent;
 }(React.Component));
 
 var __extends$1 = (undefined && undefined.__extends) || (function () {
@@ -43,7 +89,9 @@ var Dropdown = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Dropdown.prototype.render = function () {
-        return (React.createElement(SlideIn, null, this.props.open && this.renderList()));
+        return (React.createElement("div", { className: 'dropdown-container' },
+            React.createElement("span", null, this.props.open ? 'Open' : 'Closed'),
+            React.createElement(SlideIn, null, this.props.open && this.renderList())));
     };
     Dropdown.prototype.renderList = function () {
         var count = Math.trunc(Math.random() * this.props.maxItems) + 5;
@@ -51,7 +99,7 @@ var Dropdown = (function (_super) {
         for (var idx = 0; idx < count; idx++)
             items.push(React.createElement("li", { key: idx },
                 React.createElement("span", null, 'Item ' + idx)));
-        return React.createElement("ul", null, items);
+        return React.createElement("ul", { className: 'dropdown-list' }, items);
     };
     return Dropdown;
 }(React.Component));
@@ -87,7 +135,9 @@ var Main = (function (_super) {
     };
     Main.prototype.renderColumn = function (maxItems) {
         return (React.createElement("div", { className: 'main-column' },
-            React.createElement(Dropdown, { maxItems: maxItems, open: this.state.open })));
+            React.createElement("span", null, "I am above"),
+            React.createElement(Dropdown, { maxItems: maxItems, open: this.state.open }),
+            React.createElement("span", null, "I am below")));
     };
     return Main;
 }(React.Component));
