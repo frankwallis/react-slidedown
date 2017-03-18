@@ -1,0 +1,8 @@
+.main-columns {
+    display: flex;
+    flex-direction: row;
+}
+
+.main-column {
+    flex: 1 1 auto;
+}

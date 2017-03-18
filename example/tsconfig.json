@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"outDir": "../tmp",
+    	"lib": ["es5"],
+		"target": "es5",
+		"module": "es2015",
+		"removeComments": true,
+		"moduleResolution": "node",
+		"jsx": "react",
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": false,
+		"noFallthroughCasesInSwitch": true
+	}
+}

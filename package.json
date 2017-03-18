@@ -1,0 +1,17 @@
+{
+  "name": "react-slidein",
+  "version": "1.0.0",
+  "description": "Component for animating appearance using just CSS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p ./example && rollup --format iife -- tmp/example/index.js > example/bundle.js",
+    "start": ""
+  },
+  "author": "Frank Wallis",
+  "license": "MIT",
+  "devDependencies": {
+    "rollup": "^0.41.6",
+    "typescript": "^2.2.1"
+  }
+}
