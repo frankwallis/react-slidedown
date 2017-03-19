@@ -22,6 +22,7 @@
 
 .dropdown-slidein {
     background: peru;
+    border: 1px solid black;
 }
 
 .dropdown-slidein.overlay {

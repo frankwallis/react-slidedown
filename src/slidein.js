@@ -7,10 +7,12 @@ export class SlideIn extends React.Component {
         const open = (this.props.children && React.Children.count(this.props.children) !== 0)
         const className = this.props.className ? 'react-slidein ' + this.props.className : 'react-slidein';
 
+        console.log('open', open, this.props.children, React.Children.count(this.props.children));
+
         return (
             <ReactTransitionGroup {...this.props} className={className} component={'div'}>
-                { open && 
-                    <SlideInContent key={'content'}>
+                {open &&
+                    <SlideInContent key={'counter'}>
                         {this.props.children}
                     </SlideInContent>
                 }
@@ -18,38 +20,60 @@ export class SlideIn extends React.Component {
         );
     }
 }
+const entered = 0;
+const left = 0;
 
 class SlideInContent extends React.Component {
     handleRef = (element) => {
+        //console.log('reference', 'entered', entered, 'left', left, 'unmounted', this.unmounted, 'callbacks', this.callbacks && this.callbacks.length);
         this.element = element;
+        this.callbacks = [];
     }
 
     componentWillEnter(callback) {
-        this.callback = callback;
-        var prevHeight = this.element.style.height
+        //console.log('entering', 'entered', entered, 'left', left, 'unmounted', this.unmounted, 'callbacks', this.callbacks && this.callbacks.length);
+        this.callbacks.push(callback);
+        const prevHeight = this.element.style.height
         this.element.style.height = 'auto'
-        var endHeight = getComputedStyle(this.element).height
+        const endHeight = getComputedStyle(this.element).height
         this.element.style.height = prevHeight
         this.element.offsetHeight // force repaint
         this.element.style.transitionProperty = 'height'
         this.element.style.height = endHeight
+        //console.log('entered', 'entered', ++entered, 'left', left, 'unmounted', this.unmounted, 'callbacks', this.callbacks && this.callbacks.length);
     }
 
     componentWillLeave(callback) {
-        this.callback = callback;
+        //console.log('leaving', 'entered', entered, 'left', left, 'unmounted', this.unmounted, 'callbacks', this.callbacks && this.callbacks.length);
+        this.callbacks.push(callback);
         this.element.style.height = getComputedStyle(this.element).height
         this.element.style.transitionProperty = 'height'
         this.element.offsetHeight // force repaint
         this.element.style.height = '0'
+        //console.log('left', 'entered', entered, 'left', ++left, 'unmounted', this.unmounted, 'callbacks', this.callbacks && this.callbacks.length);
     }
 
     handleTransitionEnd = (evt) => {
-        if (evt.propertyName == 'height') {
-            this.element.style.height = 'auto'
-            this.element.style.transitionProperty = 'none'
-            this.callback();
-           // this.callback = null;
+        //console.log('transitionEnd', 'entered', entered, 'left', left, 'unmounted', this.unmounted, 'callbacks', this.callbacks && this.callbacks.length);
+
+        if (evt && evt.target !== this.element) {
+            console.log('breaking')
+            return;
         }
+
+        if (evt.propertyName == 'height') {
+            //console.log('before callback', 'entered', entered, 'left', left, 'unmounted', this.unmounted, 'callbacks', this.callbacks && this.callbacks.length);
+            const callback = this.callbacks.pop();
+            callback();
+
+            if (this.callbacks.length === 0) {
+                this.element.style.transitionProperty = 'none'
+                this.element.style.height = 'auto';
+            }
+            //console.log('after callback', 'entered', entered, 'left', left, 'unmounted', this.unmounted, 'callbacks', this.callbacks && this.callbacks.length);
+        }
+
+        //console.log('after transitionEnd', 'entered', entered, 'left', left, 'unmounted', this.unmounted, 'callbacks', this.callbacks && this.callbacks.length);
     }
 
     render() {

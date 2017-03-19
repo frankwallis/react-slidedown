@@ -31,8 +31,9 @@ var SlideIn = (function (_super) {
     SlideIn.prototype.render = function () {
         var open = (this.props.children && React.Children.count(this.props.children) !== 0);
         var className = this.props.className ? 'react-slidein ' + this.props.className : 'react-slidein';
+        console.log('open', open, this.props.children, React.Children.count(this.props.children));
         return (React.createElement(ReactTransitionGroup, __assign({}, this.props, { className: className, component: 'div' }), open &&
-            React.createElement(SlideInContent, { key: 'content' }, this.props.children)));
+            React.createElement(SlideInContent, { key: 'counter' }, this.props.children)));
     };
     return SlideIn;
 }(React.Component));
@@ -42,18 +43,29 @@ var SlideInContent = (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.handleRef = function (element) {
             _this.element = element;
+            _this.callbacks = [];
         };
         _this.handleTransitionEnd = function (evt) {
+            if (evt && evt.target !== _this.element) {
+                console.log('breaking');
+                return;
+            }
             if (evt.propertyName == 'height') {
-                _this.element.style.height = 'auto';
-                _this.element.style.transitionProperty = 'none';
-                _this.callback();
+                var callback = _this.callbacks.pop();
+                callback();
+                if (_this.callbacks.length === 0) {
+                    _this.element.style.transitionProperty = 'none';
+                    _this.element.style.height = 'auto';
+                }
+            }
+            else {
+                console.log('wrong transition');
             }
         };
         return _this;
     }
     SlideInContent.prototype.componentWillEnter = function (callback) {
-        this.callback = callback;
+        this.callbacks.push(callback);
         var prevHeight = this.element.style.height;
         this.element.style.height = 'auto';
         var endHeight = getComputedStyle(this.element).height;
@@ -63,7 +75,7 @@ var SlideInContent = (function (_super) {
         this.element.style.height = endHeight;
     };
     SlideInContent.prototype.componentWillLeave = function (callback) {
-        this.callback = callback;
+        this.callbacks.push(callback);
         this.element.style.height = getComputedStyle(this.element).height;
         this.element.style.transitionProperty = 'height';
         this.element.offsetHeight;
@@ -95,7 +107,7 @@ var Dropdown = (function (_super) {
         var caption = this.props.open ? 'Down' : 'Up';
         if (this.props.overlay) {
             className = 'dropdown-slidein overlay';
-            caption = this.props.open ? 'Open' : 'CLosed';
+            caption = this.props.open ? 'Open' : 'Closed';
         }
         return (React.createElement("div", { className: 'dropdown-container' },
             React.createElement("span", null, caption),
@@ -143,9 +155,9 @@ var Main = (function (_super) {
     };
     Main.prototype.renderColumn = function (maxItems, overlay) {
         return (React.createElement("div", { className: 'main-column' },
-            React.createElement("span", null, "I am above"),
+            React.createElement("span", null, 'I will ' + (overlay ? 'overlay' : 'push down')),
             React.createElement(Dropdown, { maxItems: maxItems, open: this.state.open, overlay: overlay }),
-            React.createElement("span", null, "I am below")));
+            React.createElement("span", null, 'I am ' + (overlay ? 'underneath' : 'below'))));
     };
     return Main;
 }(React.Component));

@@ -24,9 +24,9 @@ export default class Main extends React.Component {
     renderColumn(maxItems, overlay) {
         return (
             <div className={'main-column'}>
-                <span>I am above</span>
+                <span>{'I will ' + (overlay ? 'overlay' : 'push down')}</span>
                 <Dropdown maxItems={maxItems} open={this.state.open} overlay={overlay} />
-                <span>I am below</span>
+                <span>{'I am ' + (overlay ? 'underneath' : 'below')}</span>
             </div>
         )
     }
