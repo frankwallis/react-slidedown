@@ -31,7 +31,7 @@ var SlideIn = (function (_super) {
     SlideIn.prototype.render = function () {
         var open = (this.props.children && React.Children.count(this.props.children) !== 0);
         var className = this.props.className ? 'react-slidein ' + this.props.className : 'react-slidein';
-        return (React.createElement(ReactTransitionGroup, __assign({ className: className, component: 'div' }, this.props), open &&
+        return (React.createElement(ReactTransitionGroup, __assign({}, this.props, { className: className, component: 'div' }), open &&
             React.createElement(SlideInContent, { key: 'content' }, this.props.children)));
     };
     return SlideIn;
@@ -48,7 +48,6 @@ var SlideInContent = (function (_super) {
                 _this.element.style.height = 'auto';
                 _this.element.style.transitionProperty = 'none';
                 _this.callback();
-                _this.callback = null;
             }
         };
         return _this;
@@ -92,9 +91,15 @@ var Dropdown = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Dropdown.prototype.render = function () {
+        var className = 'dropdown-slidein';
+        var caption = this.props.open ? 'Down' : 'Up';
+        if (this.props.overlay) {
+            className = 'dropdown-slidein overlay';
+            caption = this.props.open ? 'Open' : 'CLosed';
+        }
         return (React.createElement("div", { className: 'dropdown-container' },
-            React.createElement("span", null, this.props.open ? 'Open' : 'Closed'),
-            React.createElement(SlideIn, { className: 'dropdown-slidein' }, this.props.open && this.renderList())));
+            React.createElement("span", null, caption),
+            React.createElement(SlideIn, { className: className }, this.props.open && this.renderList())));
     };
     Dropdown.prototype.renderList = function () {
         var count = Math.trunc(Math.random() * this.props.maxItems) + 5;
@@ -131,15 +136,15 @@ var Main = (function (_super) {
         return (React.createElement("div", { className: 'main-container' },
             React.createElement("button", { className: 'main-toggle', onClick: this.handleToggle }, "Toggle"),
             React.createElement("div", { className: 'main-columns' },
-                this.renderColumn(10),
-                this.renderColumn(20),
-                this.renderColumn(30),
-                this.renderColumn(40))));
+                this.renderColumn(10, false),
+                this.renderColumn(20, true),
+                this.renderColumn(30, false),
+                this.renderColumn(40, true))));
     };
-    Main.prototype.renderColumn = function (maxItems) {
+    Main.prototype.renderColumn = function (maxItems, overlay) {
         return (React.createElement("div", { className: 'main-column' },
             React.createElement("span", null, "I am above"),
-            React.createElement(Dropdown, { maxItems: maxItems, open: this.state.open }),
+            React.createElement(Dropdown, { maxItems: maxItems, open: this.state.open, overlay: overlay }),
             React.createElement("span", null, "I am below")));
     };
     return Main;

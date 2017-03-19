@@ -12,20 +12,20 @@ export default class Main extends React.Component {
             <div className={'main-container'}>
                 <button className={'main-toggle'} onClick={this.handleToggle}>Toggle</button>
                 <div className={'main-columns'}>
-                    {this.renderColumn(10)}
-                    {this.renderColumn(20)}
-                    {this.renderColumn(30)}
-                    {this.renderColumn(40)}
+                    {this.renderColumn(10, false)}
+                    {this.renderColumn(20, true)}
+                    {this.renderColumn(30, false)}
+                    {this.renderColumn(40, true)}
                 </div>
             </div>
         )
     }
 
-    renderColumn(maxItems) {
+    renderColumn(maxItems, overlay) {
         return (
             <div className={'main-column'}>
                 <span>I am above</span>
-                <Dropdown maxItems={maxItems} open={this.state.open} />
+                <Dropdown maxItems={maxItems} open={this.state.open} overlay={overlay} />
                 <span>I am below</span>
             </div>
         )

@@ -3,10 +3,18 @@ import {SlideIn} from '../src/slidein'
 
 export default class Dropdown extends React.Component {
     render() {
+        let className = 'dropdown-slidein';
+        let caption = this.props.open ? 'Down' : 'Up';
+
+        if (this.props.overlay) {
+            className = 'dropdown-slidein overlay';
+            caption = this.props.open ? 'Open' : 'Closed';
+        }
+
         return (
             <div className={'dropdown-container'}>
-                <span>{this.props.open ? 'Open' : 'Closed'}</span>
-                <SlideIn className={'dropdown-slidein'}>
+                <span>{caption}</span>
+                <SlideIn className={className}>
                     {this.props.open && this.renderList()}
                 </SlideIn>
             </div>

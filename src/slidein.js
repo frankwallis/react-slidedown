@@ -8,7 +8,7 @@ export class SlideIn extends React.Component {
         const className = this.props.className ? 'react-slidein ' + this.props.className : 'react-slidein';
 
         return (
-            <ReactTransitionGroup className={className} component={'div'} {...this.props}>
+            <ReactTransitionGroup {...this.props} className={className} component={'div'}>
                 { open && 
                     <SlideInContent key={'content'}>
                         {this.props.children}
@@ -48,7 +48,7 @@ class SlideInContent extends React.Component {
             this.element.style.height = 'auto'
             this.element.style.transitionProperty = 'none'
             this.callback();
-            this.callback = null;
+           // this.callback = null;
         }
     }
 

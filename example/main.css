@@ -7,6 +7,13 @@
     flex: 1 1 auto;
 }
 
+.main-toggle {
+    background: dodgerblue;
+    color: beige;
+    padding: .5em 3em .5em 3em;
+    outline: 0; 
+}
+
 .dropdown-list {
     margin: 0;
     padding: 0;
@@ -14,5 +21,10 @@
 }
 
 .dropdown-slidein {
-    position: fixed;
+    background: peru;
+}
+
+.dropdown-slidein.overlay {
+    background: lightblue;
+    position: absolute;
 }
