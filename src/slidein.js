@@ -25,7 +25,6 @@ const left = 0;
 
 class SlideInContent extends React.Component {
     handleRef = (element) => {
-        //console.log('reference', 'entered', entered, 'left', left, 'unmounted', this.unmounted, 'callbacks', this.callbacks && this.callbacks.length);
         this.element = element;
         this.callbacks = [];
     }
@@ -63,7 +62,7 @@ class SlideInContent extends React.Component {
 
         if (evt.propertyName == 'height') {
             //console.log('before callback', 'entered', entered, 'left', left, 'unmounted', this.unmounted, 'callbacks', this.callbacks && this.callbacks.length);
-            const callback = this.callbacks.pop();
+            const callback = this.callbacks.shift();
             callback();
 
             if (this.callbacks.length === 0) {

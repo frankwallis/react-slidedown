@@ -18,11 +18,11 @@
     margin: 0;
     padding: 0;
     list-style: none;
+    border: 1px solid black;
 }
 
 .dropdown-slidein {
     background: peru;
-    border: 1px solid black;
 }
 
 .dropdown-slidein.overlay {

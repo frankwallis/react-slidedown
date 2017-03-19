@@ -51,15 +51,12 @@ var SlideInContent = (function (_super) {
                 return;
             }
             if (evt.propertyName == 'height') {
-                var callback = _this.callbacks.pop();
+                var callback = _this.callbacks.shift();
                 callback();
                 if (_this.callbacks.length === 0) {
                     _this.element.style.transitionProperty = 'none';
-                    _this.element.style.height = 'auto';
+                    _this.element.style.height = (_this.element.style.height === '0') ? '0' : 'auto';
                 }
-            }
-            else {
-                console.log('wrong transition');
             }
         };
         return _this;
