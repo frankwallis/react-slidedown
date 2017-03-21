@@ -1,11 +1,6 @@
-
 .react-slidein {
-    overflow: hidden;
-    height: auto;
-}
-
-.react-slidein-content {
     height: 0;
+    overflow: hidden;
     transition-property: none;
     transition-duration: .5s;
     transition-timing-function: ease-in-out;

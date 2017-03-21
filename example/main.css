@@ -18,11 +18,13 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    border: 1px solid black;
 }
 
 .dropdown-slidein {
+    border: 1px solid black;
     background: peru;
+    transition-duration: 1.2s;
+    transition-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1);    
 }
 
 .dropdown-slidein.overlay {

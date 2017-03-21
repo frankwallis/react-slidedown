@@ -23,20 +23,6 @@ var __assign = (undefined && undefined.__assign) || Object.assign || function(t)
     return t;
 };
 var ReactTransitionGroup = React.addons.TransitionGroup;
-var SlideIn = (function (_super) {
-    __extends$2(SlideIn, _super);
-    function SlideIn() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    SlideIn.prototype.render = function () {
-        var open = (this.props.children && React.Children.count(this.props.children) !== 0);
-        var className = this.props.className ? 'react-slidein ' + this.props.className : 'react-slidein';
-        console.log('open', open, this.props.children, React.Children.count(this.props.children));
-        return (React.createElement(ReactTransitionGroup, __assign({}, this.props, { className: className, component: 'div' }), open &&
-            React.createElement(SlideInContent, { key: 'counter' }, this.props.children)));
-    };
-    return SlideIn;
-}(React.Component));
 var SlideInContent = (function (_super) {
     __extends$2(SlideInContent, _super);
     function SlideInContent() {
@@ -47,7 +33,6 @@ var SlideInContent = (function (_super) {
         };
         _this.handleTransitionEnd = function (evt) {
             if (evt && evt.target !== _this.element) {
-                console.log('breaking');
                 return;
             }
             if (evt.propertyName == 'height') {
@@ -55,7 +40,7 @@ var SlideInContent = (function (_super) {
                 callback();
                 if (_this.callbacks.length === 0) {
                     _this.element.style.transitionProperty = 'none';
-                    _this.element.style.height = (_this.element.style.height === '0') ? '0' : 'auto';
+                    _this.element.style.height = 'auto';
                 }
             }
         };
@@ -63,7 +48,7 @@ var SlideInContent = (function (_super) {
     }
     SlideInContent.prototype.componentWillEnter = function (callback) {
         this.callbacks.push(callback);
-        var prevHeight = this.element.style.height;
+        var prevHeight = this.element.offsetHeight + 'px';
         this.element.style.height = 'auto';
         var endHeight = getComputedStyle(this.element).height;
         this.element.style.height = prevHeight;
@@ -74,15 +59,30 @@ var SlideInContent = (function (_super) {
     SlideInContent.prototype.componentWillLeave = function (callback) {
         this.callbacks.push(callback);
         this.element.style.height = getComputedStyle(this.element).height;
-        this.element.style.transitionProperty = 'height';
         this.element.offsetHeight;
+        this.element.style.transitionProperty = 'height';
         this.element.style.height = '0';
     };
+    SlideInContent.prototype.componentDidUpdate = function () {
+        var previousCallback = this.callbacks.shift();
+        previousCallback && previousCallback();
+    };
     SlideInContent.prototype.render = function () {
-        return (React.createElement("div", { className: 'react-slidein-content', ref: this.handleRef, onTransitionEnd: this.handleTransitionEnd }, this.props.children));
+        var className = this.props.className ?
+            'react-slidein ' + this.props.className : 'react-slidein';
+        return (React.createElement("div", { className: className, ref: this.handleRef, onTransitionEnd: this.handleTransitionEnd }, this.props.children));
     };
     return SlideInContent;
 }(React.Component));
+var SlideInWrapper = function (props) {
+    var childrenArray = React.Children.toArray(props.children);
+    return childrenArray[0] || null;
+};
+var SlideIn = function (props) {
+    var open = (props.children && React.Children.count(props.children) !== 0);
+    return (React.createElement(ReactTransitionGroup, { component: SlideInWrapper }, open &&
+        React.createElement(SlideInContent, __assign({ key: 'content' }, props), props.children)));
+};
 
 var __extends$1 = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||

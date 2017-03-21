@@ -43,7 +43,7 @@ You can customise the transition used for the animation by overriding styles on 
 
 ```cs
 .react-slidein.dropdown-slidein {
-    transition-duration: 2s;
+    transition-duration: 1.2s;
     transition-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1);
 }
 ```
@@ -52,8 +52,8 @@ The default values used are:
 
 ```cs
 .react-slidein {
-    transition-duration: 2s;
-    transition-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1);
+    transition-duration: .5s;
+    transition-timing-function: ease-in-out;
 }
 ```
 
