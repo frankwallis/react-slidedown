@@ -12,5 +12,8 @@
 		"noImplicitReturns": true,
 		"noImplicitThis": false,
 		"noFallthroughCasesInSwitch": true
-	}
+	},
+	"include": [
+		"*.jsx"
+	]
 }
