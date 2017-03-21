@@ -1,5 +1,5 @@
 import React from 'react'
-import {SlideIn} from '../src/slidein'
+import {SlideIn} from '../lib/slidein'
 
 export default class Dropdown extends React.Component {
     render() {
