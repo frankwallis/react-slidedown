@@ -3,7 +3,7 @@ import Dropdown from './dropdown'
 
 export default class Main extends React.Component {
     constructor (props) {
-        super(props);
+        super(props)
         this.state = { open: false }
     }
 
@@ -16,9 +16,9 @@ export default class Main extends React.Component {
 
                 <div className={'main-columns'}>
                     {this.renderColumn(10, false)}
-                    {this.renderColumn(20, true)}
-                    {this.renderColumn(30, false)}
-                    {this.renderColumn(40, true)}
+                    {this.renderColumn(30, true)}
+                    {this.renderColumn(50, false)}
+                    {this.renderColumn(70, true)}
                 </div>
             </div>
         )

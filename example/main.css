@@ -15,6 +15,10 @@
     margin: .5em 3em;
 }
 
+.pure-menu-list {
+    margin: .2em;
+}
+
 .narrative {
     margin: .3em 0;
 }
@@ -23,12 +27,10 @@
     border: 1px solid gray;
     border-radius: 4px;
     width: 10em;
+    max-height: 40em;
+    background: whitesmoke;
     transition-duration: .8s;
     transition-timing-function: ease-in-out;    
-}
-
-.dropdown-list {
-    margin: .2em;
 }
 
 .dropdown-slidein.overlay {

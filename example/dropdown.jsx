@@ -3,12 +3,12 @@ import {SlideIn} from '../lib/slidein'
 
 export default class Dropdown extends React.Component {
     render() {
-        let className = 'dropdown-slidein';
-        let caption = this.props.open ? 'Down' : 'Up';
+        let className = 'dropdown-slidein'
+        let caption = this.props.open ? 'Down' : 'Up'
 
         if (this.props.overlay) {
-            className = 'dropdown-slidein overlay';
-            caption = this.props.open ? 'Open' : 'Closed';
+            className = 'dropdown-slidein overlay'
+            caption = this.props.open ? 'Open' : 'Closed'
         }
 
         return (
@@ -22,10 +22,10 @@ export default class Dropdown extends React.Component {
     }
 
     renderList() {
-        const count = Math.trunc(Math.random() * this.props.maxItems) + 5;
-        const items = [];
+        const count = Math.trunc(Math.random() * this.props.maxItems) + 5
+        const items = []
         for (var idx = 0; idx < count; idx ++)
-            items.push(<li key={idx} className={'pure-menu-item'}><span>{'Item ' + idx}</span></li>);
-        return <ul className={'pure-menu-list dropdown-list'}>{items}</ul>;
+            items.push(<li key={idx} className={'pure-menu-item'}><span>{'Item ' + idx}</span></li>)
+        return <ul className={'pure-menu-list dropdown-list'}>{items}</ul>
     }
 }
