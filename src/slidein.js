@@ -29,10 +29,15 @@ class SlideInContent extends React.Component {
         this.callbacks = [];
     }
 
+    componentDidUpdate() {
+        const previousCallback = this.callbacks.shift();
+        previousCallback && previousCallback();
+    }
+
     componentWillEnter(callback) {
         //console.log('entering', 'entered', entered, 'left', left, 'unmounted', this.unmounted, 'callbacks', this.callbacks && this.callbacks.length);
         this.callbacks.push(callback);
-        const prevHeight = this.element.style.height
+        const prevHeight = this.element.offsetHeight + 'px'
         this.element.style.height = 'auto'
         const endHeight = getComputedStyle(this.element).height
         this.element.style.height = prevHeight
@@ -46,8 +51,8 @@ class SlideInContent extends React.Component {
         //console.log('leaving', 'entered', entered, 'left', left, 'unmounted', this.unmounted, 'callbacks', this.callbacks && this.callbacks.length);
         this.callbacks.push(callback);
         this.element.style.height = getComputedStyle(this.element).height
-        this.element.style.transitionProperty = 'height'
         this.element.offsetHeight // force repaint
+        this.element.style.transitionProperty = 'height'
         this.element.style.height = '0'
         //console.log('left', 'entered', entered, 'left', ++left, 'unmounted', this.unmounted, 'callbacks', this.callbacks && this.callbacks.length);
     }
