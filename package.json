@@ -6,7 +6,7 @@
   "style": "lib/slidein.css",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "tsc ./lib/slidein.jsx -module commonjs -allowJs",
+    "prepublish": "tsc ./lib/slidein.jsx -module commonjs -allowJs -removeComments",
     "build-example": "tsc -p ./example && rollup -c ./example/rollup.config.js",
     "start-example": "live-server --open=./example",
     "start": "npm run build-example && npm run start-example"
@@ -25,7 +25,7 @@
   "dependencies": {
     "react-addons-transition-group": "^15.4.2"
   },
-  "files": ["lib/slidein-js", "lib/slidein.css"],
+  "files": ["lib/slidein.js", "lib/slidein.css"],
   "keywords": [
     "react",
     "animation",
