@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc -p ./example && rollup --format iife -- tmp/example/index.js > example/bundle.js",
+    "build": "tsc -p ./example && rollup -c ./example/rollup.config.js",
+    "build1": "tsc -p ./example && rollup --format iife -- tmp/example/index.js > example/bundle.js",
     "build-example": "tsc -p ./example && rollup --format iife -- tmp/example/index.js > example/bundle.js",
     "start-example": "live-server --open=./example",
     "start": "npm run build-example && npm run start-example"
@@ -13,7 +14,12 @@
   "author": "Frank Wallis",
   "license": "MIT",
   "devDependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
     "rollup": "^0.41.6",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-replace": "^1.1.1",
     "typescript": "^2.2.1"
   },
   "dependencies": {
