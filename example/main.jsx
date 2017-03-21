@@ -10,7 +10,10 @@ export default class Main extends React.Component {
     render() {
         return (
             <div className={'main-container'}>
-                <button className={'main-toggle'} onClick={this.handleToggle}>Toggle</button>
+                <button 
+                    className={'main-toggle pure-button pure-button-primary button-large'}
+                    onClick={this.handleToggle}>Toggle</button>
+
                 <div className={'main-columns'}>
                     {this.renderColumn(10, false)}
                     {this.renderColumn(20, true)}
@@ -24,9 +27,9 @@ export default class Main extends React.Component {
     renderColumn(maxItems, overlay) {
         return (
             <div className={'main-column'}>
-                <span>{'I will ' + (overlay ? 'overlay' : 'push down')}</span>
+                <span className={'narrative'}>{'I will ' + (overlay ? 'overlay' : 'push down')}</span>
                 <Dropdown maxItems={maxItems} open={this.state.open} overlay={overlay} />
-                <span>{'I am ' + (overlay ? 'underneath' : 'below')}</span>
+                <span className={'narrative'}>{'I am ' + (overlay ? 'underneath' : 'below')}</span>
             </div>
         )
     }

@@ -4,30 +4,33 @@
 }
 
 .main-column {
-    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding-left: 3em;
+    flex: 1 1 1em;
 }
 
 .main-toggle {
-    background: dodgerblue;
-    color: beige;
-    padding: .5em 3em .5em 3em;
-    outline: 0; 
+    margin: .5em 3em;
 }
 
-.dropdown-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+.narrative {
+    margin: .3em 0;
 }
 
 .dropdown-slidein {
-    border: 1px solid black;
-    background: peru;
-    transition-duration: 1.2s;
-    transition-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1);    
+    border: 1px solid gray;
+    border-radius: 4px;
+    width: 10em;
+    transition-duration: .8s;
+    transition-timing-function: ease-in-out;    
+}
+
+.dropdown-list {
+    margin: .2em;
 }
 
 .dropdown-slidein.overlay {
-    background: lightblue;
     position: absolute;
 }

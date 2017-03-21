@@ -14,6 +14,7 @@
   "author": "Frank Wallis",
   "license": "MIT",
   "devDependencies": {
+    "purecss": "^0.6.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "rollup": "^0.41.6",
@@ -25,7 +26,10 @@
   "dependencies": {
     "react-addons-transition-group": "^15.4.2"
   },
-  "files": ["lib/slidein.js", "lib/slidein.css"],
+  "files": [
+    "lib/slidein.js",
+    "lib/slidein.css"
+  ],
   "keywords": [
     "react",
     "animation",

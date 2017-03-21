@@ -23,7 +23,7 @@ class SlideInContent extends React.Component {
         this.element.style.height = getComputedStyle(this.element).height
         this.element.offsetHeight // force repaint
         this.element.style.transitionProperty = 'height'
-        this.element.style.height = '0'
+        this.element.style.height = '0px'
     }
 
     componentDidUpdate() {
@@ -37,9 +37,9 @@ class SlideInContent extends React.Component {
             return
         }
 
-        if (evt.propertyName == 'height') {
-            const callback = this.callbacks.shift();
-            callback();
+        if (evt.propertyName === 'height') {
+            const callback = this.callbacks.shift()
+            callback()
 
             /* sometimes callback() executes componentWillEnter */
             if (this.callbacks.length === 0) {
