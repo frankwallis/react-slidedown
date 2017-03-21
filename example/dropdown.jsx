@@ -26,6 +26,6 @@ export default class Dropdown extends React.Component {
         const items = []
         for (var idx = 0; idx < count; idx ++)
             items.push(<li key={idx} className={'pure-menu-item'}><span>{'Item ' + idx}</span></li>)
-        return <ul className={'pure-menu-list dropdown-list'}>{items}</ul>
+        return <div><ul className={'pure-menu-list dropdown-list'}>{items}</ul></div>
     }
 }

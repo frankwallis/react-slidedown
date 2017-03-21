@@ -13,6 +13,9 @@ export default class Main extends React.Component {
                 <button 
                     className={'main-toggle pure-button pure-button-primary button-large'}
                     onClick={this.handleToggle}>Toggle</button>
+                <button 
+                    className={'main-toggle pure-button pure-button-primary button-large'}
+                    onClick={() => this.forceUpdate()}>Update</button>
 
                 <div className={'main-columns'}>
                     {this.renderColumn(10, false)}
