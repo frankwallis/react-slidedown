@@ -1,7 +1,9 @@
 {
 	"compilerOptions": {
-		"outDir": "../tmp",
-    	"lib": ["es5"],
+		"outDir": "./tmp",
+		"lib": [
+			"es5"
+		],
 		"target": "es5",
 		"module": "es2015",
 		"removeComments": true,
@@ -14,6 +16,8 @@
 		"noFallthroughCasesInSwitch": true
 	},
 	"include": [
-		"*.jsx"
+		"lib/*.jsx",
+		"example/*.jsx",
+		"test/*.jsx"
 	]
 }

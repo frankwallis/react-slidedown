@@ -1,33 +1,43 @@
+const nodeResolve = require('rollup-plugin-node-resolve')
+const builtins = require('rollup-plugin-node-builtins');
+const globals = require('rollup-plugin-node-globals');
+const commonjs = require('rollup-plugin-commonjs')
+const replace = require('rollup-plugin-replace')
+const json = require('rollup-plugin-json')
+
 module.exports = function (config) {
     config.set({
         basePath: '',
-        frameworks: ['jasmine', 'karma-typescript'],
+        frameworks: ['jasmine'],
         files: [
-            'test/slidein-tests.jsx'
+            'tmp/test/slidein-tests.js'
         ],
+        reporters: ['progress'],
         preprocessors: {
-            'lib/*.jsx': ['karma-typescript'],
-            'test/*.jsx': ['karma-typescript']
+            'tmp/**/*.js': ['rollup']
         },
-        reporters: ['progress', 'karma-typescript'],
-        karmaTypescriptConfig: {
-            bundlerOptions: {
-                exclude: [
-                    'react/addons',
-                    'react/lib/ReactContext',
-                    'react/lib/ExecutionEnvironment'
-                ]
-            },
-            coverageOptions: {
-                instrumentation: false
-            },
-            compilerOptions: {
-                allowJs: true
-            },
-            include: ["./lib/**/*.jsx", "./test/**/*.jsx"],
-            transformPath: function(filepath) {
-                return filepath.replace(/\.(ts|tsx|jsx)$/, ".js");
-            },
+        rollupPreprocessor: {
+            plugins: [
+                nodeResolve({
+                    preferBuiltins: true,
+                }),
+                commonjs({
+                    ignore: [
+                        'react/addons',
+                        'react/lib/ReactContext',
+                        'react/lib/ExecutionEnvironment'
+                    ]
+                }),
+                builtins(),
+                globals(),
+                json(),
+                replace({
+                    'process.env.NODE_ENV': JSON.stringify('development')
+                })
+            ],
+            format: 'iife',
+            moduleName: 'react-slidein-tests',
+            sourceMap: 'inline'
         },
         port: 9876,
         colors: true,
