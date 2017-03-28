@@ -1,6 +1,5 @@
 *.log
 node_modules/
 coverage/
-example/bundle.js
-lib/slidein.js
+*/*.js
 tmp/

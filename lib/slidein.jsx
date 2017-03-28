@@ -1,5 +1,5 @@
-import React from 'react'
-import ReactTransitionGroup from 'react-addons-transition-group'
+import * as React from 'react'
+import * as ReactTransitionGroup from 'react-addons-transition-group'
 
 class SlideInContent extends React.Component {
     handleRef = (element) => {

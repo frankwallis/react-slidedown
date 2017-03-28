@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import Dropdown from './dropdown'
 
 export default class Main extends React.Component {
@@ -19,9 +19,9 @@ export default class Main extends React.Component {
 
                 <div className={'main-columns'}>
                     {this.renderColumn(10, false)}
-                    {this.renderColumn(30, true)}
+                    {this.renderColumn(30, false)}
                     {this.renderColumn(50, false)}
-                    {this.renderColumn(70, true)}
+                    {this.renderColumn(100, false)}
                 </div>
             </div>
         )

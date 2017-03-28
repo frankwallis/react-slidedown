@@ -1,16 +1,15 @@
 {
 	"compilerOptions": {
-		"outDir": "./tmp",
 		"lib": [
 			"es5"
 		],
 		"target": "es5",
-		"module": "es2015",
+		"module": "commonjs",
 		"removeComments": true,
 		"moduleResolution": "node",
 		"jsx": "react",
 		"allowJs": true,
-		"allowSyntheticDefaultImports": true,
+		"noResolve": true,
 		"noImplicitReturns": true,
 		"noImplicitThis": false,
 		"noFallthroughCasesInSwitch": true

@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import {SlideIn} from '../lib/slidein'
 
 export default class Dropdown extends React.Component {
