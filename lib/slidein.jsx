@@ -8,46 +8,38 @@ class SlideInContent extends React.Component {
     }
 
     componentWillEnter(callback) {
-        //console.log('enter', 'wilLEnter', this.callbacks.length)
         this.callbacks.push(callback)
-        const prevHeight = this.element.offsetHeight + 'px'
+        const prevHeight = this.element.getBoundingClientRect().height + 'px'
         this.element.style.height = 'auto'
         const endHeight = getComputedStyle(this.element).height
         this.element.style.height = prevHeight
         this.element.offsetHeight // force repaint
         this.element.style.transitionProperty = 'height'
         this.element.style.height = endHeight
-        //console.log('leave', 'wilLEnter', this.callbacks.length)
     }
 
     componentWillLeave(callback) {
-        //console.log('enter', 'willLeave', this.callbacks.length)
         this.callbacks.push(callback)
         this.element.style.height = getComputedStyle(this.element).height
         this.element.offsetHeight // force repaint
         this.element.style.transitionProperty = 'height'
         this.element.style.height = '0px'
-        //console.log('leave', 'willLeave', this.callbacks.length)
     }
 
     componentWillUpdate() {
-        //console.log('enter', 'willUpdate', this.callbacks.length)
-        
+        /* Prepare to resize */
+        if (this.callbacks.length === 0) {
+            this.element.style.height = this.element.getBoundingClientRect().height + 'px'
+        }
+    }
+
+    componentDidUpdate() {
         /* Terminate any active transition */
         const callback = this.callbacks.shift()
         callback && callback()
 
-        /* Prepare to resize */
         if (this.callbacks.length === 0) {
-            this.element.style.height = this.element.offsetHeight + 'px'  
-        }
-        //console.log('leave', 'willUpdate', this.callbacks.length)
-    }
-
-    componentDidUpdate() {
-        //console.log('enter', 'didUpdate', this.callbacks.length)
-        if (this.callbacks.length === 0) {
-            const prevHeight = this.element.offsetHeight + 'px'
+            const prevHeight = this.element.getBoundingClientRect().height + 'px'
             this.element.style.height = 'auto'
             const endHeight = getComputedStyle(this.element).height
             this.element.style.height = prevHeight
@@ -55,16 +47,10 @@ class SlideInContent extends React.Component {
             this.element.style.transitionProperty = 'height'
             this.element.style.height = endHeight
         }
-        //console.log('leave', 'didUpdate', this.callbacks.length)
     }
 
     handleTransitionEnd = (evt) => {
-        //console.log('enter', 'transitionEnd', this.callbacks.length)
-        if (evt && evt.target !== this.element) {
-            return
-        }
-
-        if (evt.propertyName === 'height') {
+        if ((evt.target === this.element) && (evt.propertyName === 'height')) {
             const callback = this.callbacks.shift()
             callback && callback()
 
@@ -74,7 +60,6 @@ class SlideInContent extends React.Component {
                 this.element.style.height = 'auto'
             }
         }
-        //console.log('leave', 'transitionEnd', this.callbacks.length)
     }
 
     render() {
