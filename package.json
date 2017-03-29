@@ -5,8 +5,9 @@
   "main": "lib/slidein.js",
   "style": "lib/slidein.css",
   "scripts": {
-    "test": "tsc && karma start",
-    "test:watch": "tsc -w && karma start",
+    "test": "npm run build && karma start --single-run",
+    "test:watch": "karma start",
+    "test:start": "concurrently \"npm run build:watch\" \"npm run test:watch\" --kill-others",
     "build": "tsc",
     "build:watch": "tsc -w",
     "example:watch": "watchify ./example/index.js -o ./example/bundle.js",
