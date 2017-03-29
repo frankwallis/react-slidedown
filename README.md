@@ -6,9 +6,9 @@ React component which animates appearance/disappearance of children between ```h
 
 ## Overview ##
 
-CSS does not currently support animating element height to ```height: auto```. and so normally javascript is needed to achieve this effect.
+CSS does not currently support animating element height to ```height: auto```. and so *normally* javascript is needed to achieve this effect.
 
-This component uses an algorithm ([first described here](http://n12v.com/css-transition-to-from-auto)) where the desired height of the element is calculated, and then css is used to transition that height. After the transition is complete the height is set to ```height: auto```.
+This component uses CSS to perform the animation, following an algorithm ([first described here](http://n12v.com/css-transition-to-from-auto)). The desired height of the element is calculated, and then css is used to transition that height. After the transition is complete the height is set to ```height: auto```.
 
 ## Installation ##
 
