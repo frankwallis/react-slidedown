@@ -2,7 +2,7 @@ import * as React from 'react'
 import Dropdown from './dropdown'
 
 export default class Main extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props)
         this.state = { open: false }
     }
@@ -10,18 +10,18 @@ export default class Main extends React.Component {
     render() {
         return (
             <div className={'main-container'}>
-                <button 
+                <button
                     className={'main-toggle pure-button pure-button-primary button-large'}
                     onClick={this.handleToggle}>Toggle</button>
-                <button 
+                <button
                     className={'main-toggle pure-button pure-button-primary button-large'}
                     onClick={() => this.forceUpdate()}>Update</button>
 
                 <div className={'main-columns'}>
                     {this.renderColumn(10, false)}
-                    {this.renderColumn(30, false)}
+                    {this.renderColumn(30, true)}
                     {this.renderColumn(50, false)}
-                    {this.renderColumn(100, false)}
+                    {this.renderColumn(100, true)}
                 </div>
             </div>
         )
@@ -38,6 +38,6 @@ export default class Main extends React.Component {
     }
 
     handleToggle = () => {
-        this.setState(state => ({open: !state.open}))
+        this.setState(state => ({ open: !state.open }))
     }
 }

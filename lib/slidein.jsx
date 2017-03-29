@@ -77,21 +77,18 @@ class SlideInContent extends React.Component {
 }
 
 /* From React docs this removes the need for another wrapper div */
-const SlideInWrapper = props => {
+function SlideInWrapper(props) {
     const childrenArray = React.Children.toArray(props.children)
     return childrenArray[0] || null
 }
 
-export const SlideIn = props => {
-    const open = (props.children && React.Children.count(props.children) !== 0)
+export function SlideIn(props) {
+    const { children, ...attrs } = props;
+    const open = (children && React.Children.count(children) !== 0)
 
     return (
         <ReactTransitionGroup component={SlideInWrapper}>
-            {open &&
-                <SlideInContent key={'content'} {...props}>
-                    {props.children}
-                </SlideInContent>
-            }
+            {open && <SlideInContent key={'content'} {...attrs}>{children}</SlideInContent>}
         </ReactTransitionGroup>
     );
 }
