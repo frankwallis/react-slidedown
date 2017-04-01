@@ -1,6 +1,6 @@
 {
   "name": "react-slidein",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Component for animating height during mount/unmount using a CSS transition",
   "main": "lib/slidein.js",
   "style": "lib/slidein.css",

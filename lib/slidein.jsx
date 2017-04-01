@@ -14,6 +14,7 @@ class SlideInContent extends React.Component {
         const endHeight = getComputedStyle(this.element).height
         this.element.style.height = prevHeight
         this.element.offsetHeight // force repaint
+        this.element.classList.add('transitioning')
         this.element.style.transitionProperty = 'height'
         this.element.style.height = endHeight
     }
@@ -22,6 +23,7 @@ class SlideInContent extends React.Component {
         this.callbacks.push(callback)
         this.element.style.height = getComputedStyle(this.element).height
         this.element.offsetHeight // force repaint
+        this.element.classList.add('transitioning')
         this.element.style.transitionProperty = 'height'
         this.element.style.height = '0px'
     }
@@ -44,6 +46,7 @@ class SlideInContent extends React.Component {
             const endHeight = getComputedStyle(this.element).height
             this.element.style.height = prevHeight
             this.element.offsetHeight // force repaint
+            this.element.classList.add('transitioning')
             this.element.style.transitionProperty = 'height'
             this.element.style.height = endHeight
         }
@@ -56,6 +59,7 @@ class SlideInContent extends React.Component {
 
             /* sometimes callback() executes componentWillEnter */
             if (this.callbacks.length === 0) {
+                this.element.classList.remove('transitioning')
                 this.element.style.transitionProperty = 'none'
                 this.element.style.height = 'auto'
             }
