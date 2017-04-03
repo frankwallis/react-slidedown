@@ -12,18 +12,18 @@ class SlideInContent extends React.Component {
         const prevHeight = this.element.getBoundingClientRect().height + 'px'
         this.element.style.height = 'auto'
         const endHeight = getComputedStyle(this.element).height
+        this.element.classList.add('transitioning')
         this.element.style.height = prevHeight
         this.element.offsetHeight // force repaint
-        this.element.classList.add('transitioning')
         this.element.style.transitionProperty = 'height'
         this.element.style.height = endHeight
     }
 
     componentWillLeave(callback) {
         this.callbacks.push(callback)
+        this.element.classList.add('transitioning')
         this.element.style.height = getComputedStyle(this.element).height
         this.element.offsetHeight // force repaint
-        this.element.classList.add('transitioning')
         this.element.style.transitionProperty = 'height'
         this.element.style.height = '0px'
     }
@@ -41,14 +41,20 @@ class SlideInContent extends React.Component {
         callback && callback()
 
         if (this.callbacks.length === 0) {
-            const prevHeight = this.element.getBoundingClientRect().height + 'px'
-            this.element.style.height = 'auto'
-            const endHeight = getComputedStyle(this.element).height
-            this.element.style.height = prevHeight
-            this.element.offsetHeight // force repaint
-            this.element.classList.add('transitioning')
-            this.element.style.transitionProperty = 'height'
-            this.element.style.height = endHeight
+            var prevHeight = getComputedStyle(this.element).height;
+            this.element.style.height = 'auto';
+            var endHeight = getComputedStyle(this.element).height;
+
+            if (parseFloat(endHeight).toFixed(2) !== parseFloat(prevHeight).toFixed(2)) {
+                this.element.classList.add('transitioning');
+                this.element.style.height = prevHeight;
+                this.element.offsetHeight;
+                this.element.style.transitionProperty = 'height';
+                this.element.style.height = endHeight;
+            }
+            else {
+                this.element.style.height = 'auto'
+            }
         }
     }
 
