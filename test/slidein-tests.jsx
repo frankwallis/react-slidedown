@@ -1,8 +1,8 @@
+import 'core-js/shim'
 import * as React from 'react'
 import * as enzyme from 'enzyme'
 import { SlideIn } from '../lib/slidein'
 import { expect } from 'chai'
-import 'es6-promise/auto'
 
 function pause(millis) {
     return new Promise(resolve => setTimeout(resolve, millis));
@@ -26,11 +26,12 @@ describe('SlideIn', () => {
     })
 
     xit('animates height when child is inserted', async () => {
-        const slidein = enzyme.mount(<SlideIn></SlideIn>, { attachTo: document.body });
-        const fixedHeightDiv = <div style={{ 'minHeight': '200px' }}></div>;
+        const slidein = enzyme.mount(<SlideIn style={{ transitionDuration: '.1s', transitionTimingFunction: 'ease-out' }}></SlideIn>, { attachTo: document.body });
+        const fixedHeightDiv = <div style={{ 'minHeight': '200px' }}>ggg</div>;
         slidein.setProps({ children: fixedHeightDiv });
+        slidein.update()
         expect(slidein.getDOMNode().style.height).to.be.equal('200px');
-        await pause(600);
-        expect(slidein.getDOMNode().style.height).to.be.equal('auto');
+        await pause(1000);
+        // expect(slidein.getDOMNode().style.height).to.be.equal('auto');
     })
 })

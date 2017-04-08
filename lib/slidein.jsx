@@ -1,5 +1,5 @@
 import * as React from 'react'
-import * as ReactTransitionGroup from 'react-addons-transition-group'
+import * as TransitionGroup from 'react-transition-group/TransitionGroup'
 
 class SlideInContent extends React.Component {
 
@@ -108,8 +108,8 @@ export function SlideIn(props) {
     const open = (children && React.Children.count(children) !== 0)
 
     return (
-        <ReactTransitionGroup component={SlideInWrapper}>
+        <TransitionGroup component={SlideInWrapper}>
             {open && <SlideInContent key={'content'} {...attrs}>{children}</SlideInContent>}
-        </ReactTransitionGroup>
+        </TransitionGroup>
     );
 }
