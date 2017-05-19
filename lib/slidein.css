@@ -11,4 +11,5 @@
 
 .react-slidein.closed {
     border: none;
+    overflow: hidden;
 }
