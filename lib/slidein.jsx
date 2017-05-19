@@ -5,7 +5,8 @@ import * as TransitionGroup from 'react-addons-transition-group'
 class SlideInContent extends React.Component {
 
     static defaultProps = {
-        transitionOnAppear: true
+        transitionOnAppear: true,
+        closed: false
     }
 
     handleRef = (element) => {
@@ -13,13 +14,18 @@ class SlideInContent extends React.Component {
         this.callbacks = []
     }
 
+    componentDidMount() {
+        if (this.props.closed)
+            this.element.classList.add('closed')
+    }
+
     componentWillAppear(callback) {
         if (this.props.transitionOnAppear) {
             this.callbacks.push(callback)
-            this.startTransitionToAuto('0px')
+            this.startTransition('0px')
         }
         else {
-            this.element.style.height = 'auto'
+            this.element.style.height = this.props.closed ? '0px' : 'auto'
             callback()
         }
     }
@@ -27,7 +33,7 @@ class SlideInContent extends React.Component {
     componentWillEnter(callback) {
         this.callbacks.push(callback)
         const prevHeight = this.element.getBoundingClientRect().height + 'px'
-        this.startTransitionToAuto(prevHeight);
+        this.startTransition(prevHeight)
     }
 
     componentWillLeave(callback) {
@@ -52,13 +58,17 @@ class SlideInContent extends React.Component {
         callback && callback()
 
         if (this.callbacks.length === 0) {
-            const prevHeight = getComputedStyle(this.element).height;
-            this.startTransitionToAuto(prevHeight)
+            const prevHeight = getComputedStyle(this.element).height
+            this.startTransition(prevHeight)
         }
     }
 
-    startTransitionToAuto(prevHeight) {
-        this.element.style.height = 'auto'
+    startTransition(prevHeight) {
+        this.element.style.height = this.props.closed ? '0px' : 'auto'
+
+        if (!this.props.closed)
+            this.element.classList.remove('closed')
+
         const endHeight = getComputedStyle(this.element).height
 
         if (parseFloat(endHeight).toFixed(2) !== parseFloat(prevHeight).toFixed(2)) {
@@ -79,7 +89,10 @@ class SlideInContent extends React.Component {
             if (this.callbacks.length === 0) {
                 this.element.classList.remove('transitioning')
                 this.element.style.transitionProperty = 'none'
-                this.element.style.height = 'auto'
+                this.element.style.height = this.props.closed ? '0px' : 'auto'
+
+                if (this.props.closed)
+                    this.element.classList.add('closed')
             }
         }
     }
@@ -105,12 +118,12 @@ function SlideInWrapper(props) {
 }
 
 export function SlideIn(props) {
-    const { children, ...attrs } = props;
-    const open = (children && React.Children.count(children) !== 0)
+    const { children, ...attrs } = props
+    const hasContent = (children && React.Children.count(children) !== 0)
 
     return (
         <TransitionGroup component={SlideInWrapper}>
-            {open && <SlideInContent key={'content'} {...attrs}>{children}</SlideInContent>}
+            {hasContent && <SlideInContent key={'content'} {...attrs}>{children}</SlideInContent>}
         </TransitionGroup>
-    );
+    )
 }

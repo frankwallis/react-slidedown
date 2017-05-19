@@ -18,20 +18,20 @@ export default class Main extends React.Component {
                     onClick={() => this.forceUpdate()}>Update</button>
 
                 <div className={'main-columns'}>
-                    {this.renderColumn(10, false)}
-                    {this.renderColumn(30, true)}
-                    {this.renderColumn(50, false)}
-                    {this.renderColumn(100, true)}
+                    {this.renderColumn(10, false, false)}
+                    {this.renderColumn(30, true, true)}
+                    {this.renderColumn(50, false, true)}
+                    {this.renderColumn(100, true, false)}
                 </div>
             </div>
         )
     }
 
-    renderColumn(maxItems, overlay) {
+    renderColumn(maxItems, overlay, alwaysRender) {
         return (
             <div className={'main-column'}>
                 <span className={'narrative'}>{'I will ' + (overlay ? 'overlay' : 'push down')}</span>
-                <Dropdown maxItems={maxItems} open={this.state.open} overlay={overlay} />
+                <Dropdown maxItems={maxItems} open={this.state.open} overlay={overlay} alwaysRender={alwaysRender} />
                 <span className={'narrative'}>{'I am ' + (overlay ? 'underneath' : 'below')}</span>
             </div>
         )

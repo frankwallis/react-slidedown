@@ -8,3 +8,7 @@
 .react-slidein.transitioning {
     overflow-y: hidden;
 }
+
+.react-slidein.closed {
+    border: none;
+}

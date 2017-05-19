@@ -29,6 +29,7 @@
     width: 10em;
     max-height: 40em;
     background: whitesmoke;
+    overflow-y: auto;
     transition-duration: .8s;
     transition-timing-function: ease-in-out;    
 }

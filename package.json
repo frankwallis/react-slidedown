@@ -1,6 +1,6 @@
 {
   "name": "react-slidein",
-  "version": "1.0.12",
+  "version": "1.0.14",
   "description": "Component for animating height during mount/unmount using a CSS transition",
   "main": "lib/slidein.js",
   "style": "lib/slidein.css",
@@ -11,7 +11,7 @@
     "build": "tsc",
     "build:watch": "tsc -w",
     "example:watch": "watchify ./example/index.js -o ./example/bundle.js",
-    "example:serve": "live-server --open=./example",
+    "example:serve": "live-server --open=./example --port=5555",
     "start": "concurrently \"npm run build:watch\" \"npm run example:watch\" \"npm run example:serve\" --kill-others"
   },
   "author": "Frank Wallis",
@@ -42,6 +42,7 @@
     "lib/slidein.css",
     "lib/slidein.js.map"
   ],
+  "repository": "frankwallis/react-slidein",
   "keywords": [
     "react",
     "animation",
