@@ -64,12 +64,13 @@ class SlideInContent extends React.Component {
     }
 
     startTransition(prevHeight) {
-        this.element.style.height = this.props.closed ? '0px' : 'auto'
+        let endHeight = '0px'
 
-        if (!this.props.closed)
+        if (!this.props.closed) {
             this.element.classList.remove('closed')
-
-        const endHeight = getComputedStyle(this.element).height
+            this.element.style.height = 'auto'
+            endHeight = getComputedStyle(this.element).height
+        }
 
         if (parseFloat(endHeight).toFixed(2) !== parseFloat(prevHeight).toFixed(2)) {
             this.element.classList.add('transitioning')
