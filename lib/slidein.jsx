@@ -1,6 +1,5 @@
 import * as React from 'react'
-import * as TransitionGroup from 'react-addons-transition-group'
-//import * as TransitionGroup from 'react-transition-group/TransitionGroup'
+import * as TransitionGroup from 'react-transition-group/TransitionGroup'
 
 class SlideInContent extends React.Component {
 

@@ -1,12 +1,12 @@
 react-slidein
 ============================
-React component which animates appearance/disappearance of children between ```height: 0``` and ```height: auto``` using a CSS transition.
+React component which uses CSS to animate a child from its current height to ```height: auto``` when mounting/updating/unmounting.
 
 [![build status](https://secure.travis-ci.org/frankwallis/react-slidein.png?branch=master)](http://travis-ci.org/frankwallis/react-slidein)
 
 ## Overview ##
 
-CSS does not currently support animating element height to ```height: auto```. and so *normally* javascript is needed to achieve this effect.
+CSS does not currently support animating element height to ```height: auto```. and so *normally* javascript is used to achieve this effect.
 
 This component uses CSS to perform the animation, following an algorithm ([first described here](http://n12v.com/css-transition-to-from-auto)). The desired height of the element is calculated, and then css is used to transition that height. After the transition is complete the height is set to ```height: auto```.
 
@@ -25,14 +25,22 @@ import React from 'react'
 import {SlideIn} from 'react-slidein'
 
 export function MyDropdown(props) {
-  const content = props.open ? props.children : null
-
   return (
     <SlideIn className={'my-dropdown-slidein'}>
-      {content}
+      {props.open ? props.children : null}
     </SlideIn>
   )
 }
+```
+
+## Example ##
+
+To run the example project:
+```
+git clone https://github.com/frankwallis/react-slidein.git
+cd react-slidein
+npm install
+npm start
 ```
 
 ## Customisation ##
@@ -53,14 +61,4 @@ The default values used are:
     transition-duration: .5s;
     transition-timing-function: ease-in-out;
 }
-```
-
-## Example ##
-
-To run the example project:
-```
-git clone https://github.com/frankwallis/react-slidein.git
-cd react-slidein
-npm install
-npm start
 ```
