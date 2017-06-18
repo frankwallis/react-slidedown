@@ -4,7 +4,7 @@ module.exports = function (config) {
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,
-        browsers: ['PhantomJS'],
+        browsers: ['ChromeHeadless'],
         files: [
             'lib/slidein.css',
             'test/slidein-tests.js'

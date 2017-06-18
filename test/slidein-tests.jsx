@@ -9,20 +9,35 @@ function pause(millis) {
 }
 
 describe('SlideIn', () => {
-    it('renders nothing when empty', () => {
+    it('renders no children when empty', () => {
         const slidein = enzyme.mount(<SlideIn></SlideIn>);
         expect(slidein.children()).to.have.length(0);
     })
 
-    it('renders a div with class react-slidein', () => {
-        const slidein = enzyme.mount(<SlideIn>slideme</SlideIn>);
+    it('renders content when present', () => {
+        const slidein = enzyme.mount(<SlideIn>findme</SlideIn>);
+        expect(slidein.text()).to.equal('findme');
+    })
+
+    it('renders container div with class react-slidein', () => {
+        const slidein = enzyme.mount(<SlideIn>anything</SlideIn>);
         expect(slidein.hasClass('react-slidein')).to.be.true;
     })
 
-    it('adds className property', () => {
+    it('adds className property to container', () => {
         const slidein = enzyme.mount(<SlideIn className={'my-class'}>slideme</SlideIn>);
         expect(slidein.hasClass('react-slidein')).to.be.true;
         expect(slidein.hasClass('my-class')).to.be.true;
+    })
+
+    it('sets closed class on container when closed property is set', async () => {
+        const slidein = enzyme.mount(<SlideIn closed={true}><div className={'findme'} /></SlideIn>, { attachTo: document.body });
+        expect(slidein.hasClass('closed')).to.be.true;
+    })
+
+    it('renders children when closed property is set', async () => {
+        const slidein = enzyme.mount(<SlideIn closed={true}><div className={'findme'} /></SlideIn>, { attachTo: document.body });
+        expect(slidein.find('.findme')).to.have.length(1);
     })
 
     xit('animates height when child is inserted', async () => {
