@@ -6,9 +6,9 @@ React component which uses CSS to animate a child from its current height to ```
 
 ## Overview ##
 
-CSS does not currently support animating element height to ```height: auto```. and so *normally* javascript is used to achieve this effect.
+CSS does not currently support animating element height to ```height: auto``` and so *normally* javascript is used to achieve this effect.
 
-This component uses CSS to perform the animation, following an algorithm ([first described here](http://n12v.com/css-transition-to-from-auto)). The desired height of the element is calculated, and then css is used to transition that height. After the transition is complete the height is set to ```height: auto```.
+This component uses CSS to perform the animation, following an algorithm ([first described here](http://n12v.com/css-transition-to-from-auto)). The desired height of the element is calculated, and then css is used to transition that height. After the transition has completed the height is set to ```height: auto```.
 
 ## Installation ##
 
@@ -18,7 +18,7 @@ npm install react-slidein --save
 
 ## Usage ##
 
-Simply wrap the component you want slide in the ```SlideIn``` component:
+Simply wrap the component you want to slide with the ```SlideIn``` component:
 
 ```js
 import React from 'react'
