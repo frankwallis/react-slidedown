@@ -22,7 +22,9 @@ Simply wrap the component you want to slide with the ```SlideIn``` component:
 
 ```js
 import React from 'react'
+
 import {SlideIn} from 'react-slidein'
+import 'react-slidein/lib/slidein.css'
 
 export function MyDropdown(props) {
   return (
@@ -31,6 +33,12 @@ export function MyDropdown(props) {
     </SlideIn>
   )
 }
+```
+
+In the example above the css file needed by react-slidein is included via JavaScript which is the normal way of doing things when using [webpack css-loader](https://github.com/webpack-contrib/css-loader), it is also populated in the ```style``` property of package.json so if you are using [parcelify](https://github.com/rotundasoftware/parcelify) it should get included automatically. Otherwise it is also possibe to import it from css:
+
+```
+@import "node_modules/react-slidein/lib/slidein.css";
 ```
 
 ## Example ##
