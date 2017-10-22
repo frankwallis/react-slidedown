@@ -8,11 +8,6 @@ import { SlideIn } from '../lib/slidein'
 /* Configure enzyme */
 enzyme.configure({ adapter: new Adapter() });
 
-/* Workaround for Karma bug #636 */
-const links = document.getElementsByTagName('link');
-for (var i = 0; i < links.length; i ++)
-    document.head.appendChild(links[i]);
-    
 /* async/await sleep */
 function pause(millis) {
     return new Promise(resolve => setTimeout(resolve, millis));
@@ -71,6 +66,21 @@ describe('SlideIn', () => {
             await pause(100);
             expect(slidein.find('.react-slidein').getDOMNode().clientHeight).to.equal(0);
         })
+
+        it('reverses transition when item is removed half-way through', async () => {
+            const slidein = enzyme.mount(<SlideIn className={'test-slidein'}><div className={'test-content'} /></SlideIn>, { attachTo });
+            expect(slidein.find('.react-slidein').getDOMNode().clientHeight).to.equal(0);
+            await pause(50);
+            const midHeight = slidein.find('.react-slidein').getDOMNode().clientHeight;
+            expect(midHeight).to.be.lessThan(18);
+            
+            slidein.setProps({ children: null });
+            expect(slidein.find('.react-slidein').getDOMNode().clientHeight).to.equal(midHeight);
+            await pause(50);
+            expect(slidein.find('.react-slidein').getDOMNode().clientHeight).to.be.lessThan(midHeight);
+            await pause(50);
+            expect(slidein.find('.react-slidein').getDOMNode().clientHeight).to.equal(0);
+        })
     });
 
     describe('transitionOnAppear', () => {        
@@ -87,7 +97,7 @@ describe('SlideIn', () => {
         })
     });
 
-    describe('Closed property', () => {        
+    describe('closed property', () => {        
         it('sets closed class on container when mounted with closed property set', () => {
             const slidein = enzyme.mount(<SlideIn closed={true}><div className={'findme'} /></SlideIn>, { attachTo });
             expect(slidein.find('.react-slidein').getDOMNode().classList.contains('closed')).to.be.true;
@@ -122,6 +132,20 @@ describe('SlideIn', () => {
             slidein.setProps({ closed: true });
             expect(slidein.find('.react-slidein').getDOMNode().clientHeight).to.equal(18);
             await pause(100);
+            expect(slidein.find('.react-slidein').getDOMNode().clientHeight).to.equal(0);
+        })
+
+        it('reverses transition when closed property is set half-way through opening', async () => {
+            const slidein = enzyme.mount(<SlideIn className={'test-slidein'}><div className={'test-content'} /></SlideIn>, { attachTo });
+            await pause(50);
+            const midHeight = slidein.find('.react-slidein').getDOMNode().clientHeight;
+            expect(midHeight).to.be.lessThan(18);
+
+            slidein.setProps({ closed: true });
+            expect(slidein.find('.react-slidein').getDOMNode().clientHeight).to.equal(midHeight);
+            await pause(50);
+            expect(slidein.find('.react-slidein').getDOMNode().clientHeight).to.be.lessThan(midHeight);
+            await pause(50);
             expect(slidein.find('.react-slidein').getDOMNode().clientHeight).to.equal(0);
         })
     });

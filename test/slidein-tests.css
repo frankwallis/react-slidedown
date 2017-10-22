@@ -1,5 +1,6 @@
 .react-slidein.test-slidein {
    transition-duration: .1s;
+   transition-timing-function: linear;
 }
 
 .test-content {
