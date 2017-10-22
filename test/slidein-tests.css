@@ -1,0 +1,7 @@
+.react-slidein.test-slidein {
+   transition-duration: .1s;
+}
+
+.test-content {
+   height: 18px;
+}

@@ -7,6 +7,7 @@ module.exports = function (config) {
         browsers: ['ChromeHeadless'],
         files: [
             'lib/slidein.css',
+            'test/slidein-tests.css',
             'test/slidein-tests.js'
         ],
         frameworks: ['browserify', 'mocha'],
