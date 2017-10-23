@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as TransitionGroup from 'react-transition-group/TransitionGroup'
 
-class SlideInContent extends React.Component {
+class SlideDownContent extends React.Component {
 
     static defaultProps = {
         transitionOnAppear: true,
@@ -99,7 +99,7 @@ class SlideInContent extends React.Component {
 
     render() {
         const className = this.props.className ?
-            'react-slidein ' + this.props.className : 'react-slidein'
+            'react-slidedown ' + this.props.className : 'react-slidedown'
 
         return (
             <div className={className}
@@ -112,18 +112,18 @@ class SlideInContent extends React.Component {
 }
 
 /* From React docs this removes the need for another wrapper div */
-function SlideInWrapper(props) {
+function SlideDownWrapper(props) {
     const childrenArray = React.Children.toArray(props.children)
     return childrenArray[0] || null
 }
 
-export function SlideIn(props) {
+export function SlideDown(props) {
     const { children, ...attrs } = props
     const hasContent = (children && React.Children.count(children) !== 0)
 
     return (
-        <TransitionGroup component={SlideInWrapper}>
-            {hasContent && <SlideInContent key={'content'} {...attrs}>{children}</SlideInContent>}
+        <TransitionGroup component={SlideDownWrapper}>
+            {hasContent && <SlideDownContent key={'content'} {...attrs}>{children}</SlideDownContent>}
         </TransitionGroup>
     )
 }

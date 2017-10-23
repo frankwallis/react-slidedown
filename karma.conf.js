@@ -5,9 +5,9 @@ module.exports = function (config) {
         logLevel: config.LOG_INFO,
         browsers: ['ChromeHeadless'],
         files: [
-            'lib/slidein.css',
-            'test/slidein-tests.css',
-            'test/slidein-tests.js'
+            'lib/slidedown.css',
+            'test/slidedown-tests.css',
+            'test/slidedown-tests.js'
         ],
         frameworks: ['browserify', 'mocha'],
         preprocessors: {

@@ -1,8 +1,8 @@
-react-slidein
+react-slidedown
 ============================
 React component which uses CSS to animate a child from its current height to ```height: auto``` when mounting/updating/unmounting.
 
-[![build status](https://secure.travis-ci.org/frankwallis/react-slidein.png?branch=master)](http://travis-ci.org/frankwallis/react-slidein)
+[![build status](https://secure.travis-ci.org/frankwallis/react-slidedown.png?branch=master)](http://travis-ci.org/frankwallis/react-slidedown)
 
 ## Overview ##
 
@@ -13,50 +13,50 @@ This component uses CSS to perform the animation, following an algorithm ([first
 ## Installation ##
 
 ```sh
-npm install react-slidein --save
+npm install react-slidedown --save
 ```
 
 ## Usage ##
 
-Simply wrap the component you want to slide with the ```SlideIn``` component:
+Simply wrap the component you want to slide with the ```SlideDown``` component:
 
 ```js
 import React from 'react'
 
-import {SlideIn} from 'react-slidein'
-import 'react-slidein/lib/slidein.css'
+import {SlideDown} from 'react-slidedown'
+import 'react-slidedown/lib/slidedown.css'
 
 export function MyDropdown(props) {
   return (
-    <SlideIn className={'my-dropdown-slidein'}>
+    <SlideDown className={'my-dropdown-slidedown'}>
       {props.open ? props.children : null}
-    </SlideIn>
+    </SlideDown>
   )
 }
 ```
 
-In the example above the css file needed by react-slidein is included via JavaScript which is the normal way of doing things when using [webpack css-loader](https://github.com/webpack-contrib/css-loader), it is also populated in the ```style``` property of package.json so if you are using [parcelify](https://github.com/rotundasoftware/parcelify) it should get included automatically. Otherwise it is also possibe to import it from css:
+In the example above the css file needed by react-slidedown is included via JavaScript which is the normal way of doing things when using [webpack css-loader](https://github.com/webpack-contrib/css-loader), it is also populated in the ```style``` property of package.json so if you are using [parcelify](https://github.com/rotundasoftware/parcelify) it should get included automatically. Otherwise it is also possibe to import it from css:
 
 ```
-@import "node_modules/react-slidein/lib/slidein.css";
+@import "node_modules/react-slidedown/lib/slidedown.css";
 ```
 
 ## Example ##
 
 To run the example project:
 ```
-git clone https://github.com/frankwallis/react-slidein.git
-cd react-slidein
+git clone https://github.com/frankwallis/react-slidedown.git
+cd react-slidedown
 npm install
 npm start
 ```
 
 ## Customisation ##
 
-You can customise the transition used for the animation by overriding styles on the ```SlideIn``` component:
+You can customise the transition used for the animation by overriding styles on the ```SlideDown``` component:
 
 ```cs
-.react-slidein.my-dropdown-slidein {
+.react-slidedown.my-dropdown-slidedown {
     transition-duration: 1.2s;
     transition-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1);
 }
@@ -65,7 +65,7 @@ You can customise the transition used for the animation by overriding styles on 
 The default values used are:
 
 ```cs
-.react-slidein {
+.react-slidedown {
     transition-duration: .5s;
     transition-timing-function: ease-in-out;
 }

@@ -1,14 +1,14 @@
-.react-slidein {
+.react-slidedown {
     height: 0;
     transition-property: none;
     transition-duration: .5s;
     transition-timing-function: ease-in-out;
 }
 
-.react-slidein.transitioning {
+.react-slidedown.transitioning {
     overflow-y: hidden;
 }
 
-.react-slidein.closed {
+.react-slidedown.closed {
     display: none;
 }

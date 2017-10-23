@@ -1,15 +1,15 @@
 import * as React from 'react'
-import { SlideIn } from '../lib/slidein'
+import { SlideDown } from '../lib/slidedown'
 
 export default class Dropdown extends React.Component {
     render() {
-        let className = 'dropdown-slidein'
+        let className = 'dropdown-slidedown'
         let caption = this.props.open ? 'Down' : 'Up'
         let render = this.props.open;
         let closed = false;
 
         if (this.props.overlay) {
-            className = 'dropdown-slidein overlay'
+            className = 'dropdown-slidedown overlay'
             caption = this.props.open ? 'Open' : 'Closed'
         }
 
@@ -21,9 +21,9 @@ export default class Dropdown extends React.Component {
         return (
             <div className={'dropdown-container'}>
                 <span className={'narrative'}>{caption}</span>
-                <SlideIn className={'pure-menu pure-menu-scrollable ' + className} closed={closed}>
+                <SlideDown className={'pure-menu pure-menu-scrollable ' + className} closed={closed}>
                     {render && this.renderList()}
-                </SlideIn>
+                </SlideDown>
             </div>
         )
     }

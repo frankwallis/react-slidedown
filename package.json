@@ -1,9 +1,9 @@
 {
-  "name": "react-slidein",
+  "name": "react-slidedown",
   "version": "1.2.0",
   "description": "Component for animating height during mount/unmount using a CSS transition",
-  "main": "lib/slidein.js",
-  "style": "lib/slidein.css",
+  "main": "lib/slidedown.js",
+  "style": "lib/slidedown.css",
   "scripts": {
     "test": "npm run build && karma start --single-run",
     "test:watch": "karma start",
@@ -42,11 +42,11 @@
     "react-transition-group": "^1.2.0"
   },
   "files": [
-    "lib/slidein.js",
-    "lib/slidein.css",
-    "lib/slidein.js.map"
+    "lib/slidedown.js",
+    "lib/slidedown.css",
+    "lib/slidedown.js.map"
   ],
-  "repository": "frankwallis/react-slidein",
+  "repository": "frankwallis/react-slidedown",
   "keywords": [
     "react",
     "animation",

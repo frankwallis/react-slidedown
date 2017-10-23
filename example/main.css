@@ -23,7 +23,7 @@
     margin: .3em 0;
 }
 
-.dropdown-slidein {
+.dropdown-slidedown {
     border: 1px solid gray;
     border-radius: 4px;
     width: 10em;
@@ -34,6 +34,6 @@
     transition-timing-function: ease-in-out;    
 }
 
-.dropdown-slidein.overlay {
+.dropdown-slidedown.overlay {
     position: absolute;
 }
