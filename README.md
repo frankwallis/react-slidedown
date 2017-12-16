@@ -10,6 +10,8 @@ CSS does not currently support animating element height to ```height: auto``` an
 
 This component uses CSS to perform the animation, following an algorithm ([first described here](http://n12v.com/css-transition-to-from-auto)). The desired height of the element is calculated, and then css is used to transition that height. After the transition has completed the height is set to ```height: auto```.
 
+react-slidein is perfect for dropdown lists, popup menus, accordions and closeable panels which have varying sized content.
+
 ## Installation ##
 
 ```sh
@@ -43,7 +45,9 @@ In the example above the css file needed by react-slidedown is included via Java
 
 ## Example ##
 
-To run the example project:
+To quickly see a live demonstration of react-slidein working go [here](https://ykxm1vz5vv.codesandbox.io/)
+
+To build and run this example project:
 ```
 git clone https://github.com/frankwallis/react-slidedown.git
 cd react-slidedown
