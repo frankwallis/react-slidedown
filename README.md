@@ -12,6 +12,8 @@ This component uses CSS to perform the animation, following an algorithm ([first
 
 react-slidein is perfect for dropdown lists, popup menus, accordions and closeable panels which have varying sized content.
 
+I am not aware of any cross-browser issues from IE10 and onwards.
+
 ## Installation ##
 
 ```sh
@@ -45,7 +47,7 @@ In the example above the css file needed by react-slidedown is included via Java
 
 ## Example ##
 
-To quickly see a live demonstration of react-slidein working go [here](https://ykxm1vz5vv.codesandbox.io/)
+To quickly see a live demonstration of react-slidein go [here](https://ykxm1vz5vv.codesandbox.io/).
 
 To build and run this example project:
 ```
