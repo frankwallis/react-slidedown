@@ -6,6 +6,8 @@
 		],
 		"target": "es5",
 		"module": "commonjs",
+		"esModuleInterop": true,
+		"importHelpers": true,
 		"removeComments": true,
 		"moduleResolution": "node",
 		"sourceMap": true,

@@ -1,5 +1,5 @@
-import * as React from 'react'
-import * as TransitionGroup from 'react-transition-group/TransitionGroup'
+import React from 'react'
+import TransitionGroup from 'react-transition-group/TransitionGroup'
 
 class SlideDownContent extends React.Component {
 

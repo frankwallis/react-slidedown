@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { SlideDown } from '../lib/slidedown'
 
 export default class Dropdown extends React.Component {

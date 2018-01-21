@@ -1,7 +1,7 @@
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
-import * as enzyme from 'enzyme'
-import * as Adapter from 'enzyme-adapter-react-16'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import enzyme from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
 import { expect } from 'chai'
 import { SlideDown } from '../lib/slidedown'
 
