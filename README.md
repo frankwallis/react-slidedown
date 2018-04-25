@@ -45,6 +45,15 @@ In the example above the css file needed by react-slidedown is included via Java
 @import "node_modules/react-slidedown/lib/slidedown.css";
 ```
 
+## Props
+
+| Property | Type | Default | Required? | Description |
+|:---|:---|:---|:---:|:---|
+| closed | Boolean | `false` | No | If `false` renders in closed mode, if `true` then slides down |
+| className | String | | No | CSS class name to be used |
+| transitionOnAppear | Boolean | `true` | No | Do a transition animation on [`componentWillEnter()`](https://reactjs.org/docs/animation.html#componentwillenter) |
+
+
 ## Example ##
 
 To quickly see a live demonstration of react-slidein go [here](https://ykxm1vz5vv.codesandbox.io/).
