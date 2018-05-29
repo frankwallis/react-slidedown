@@ -44,20 +44,20 @@ class SlideDownContent extends React.Component {
         this.element.style.height = '0px'
     }
 
-    componentWillUpdate() {
+    getSnapshotBeforeUpdate() {
         /* Prepare to resize */
         if (this.callbacks.length === 0) {
-            this.element.style.height = this.element.getBoundingClientRect().height + 'px'
+            return this.element.getBoundingClientRect().height + 'px'
         }
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState, snapshot) {
         /* Terminate any active transition */
         const callback = this.callbacks.shift()
         callback && callback()
 
         if (this.callbacks.length === 0) {
-            const prevHeight = getComputedStyle(this.element).height
+            const prevHeight = snapshot || getComputedStyle(this.element).height
             this.startTransition(prevHeight)
         }
     }
