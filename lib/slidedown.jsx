@@ -8,14 +8,12 @@ class SlideDownContent extends React.Component {
         closed: false
     }
 
-    handleRef = (element) => {
-        this.element = element
-        this.callbacks = []
-    }
+    element = this.props.forwardedRef || React.createRef()
+    callbacks = []
 
     componentDidMount() {
         if (this.props.closed)
-            this.element.classList.add('closed')
+            this.element.current.classList.add('closed')
     }
 
     componentWillAppear(callback) {
@@ -24,31 +22,32 @@ class SlideDownContent extends React.Component {
             this.startTransition('0px')
         }
         else {
-            this.element.style.height = this.props.closed ? '0px' : 'auto'
+            this.element.current.style.height = this.props.closed ? '0px' : 'auto'
             callback()
         }
     }
 
     componentWillEnter(callback) {
         this.callbacks.push(callback)
-        const prevHeight = this.element.getBoundingClientRect().height + 'px'
+        const prevHeight = this.element.current.getBoundingClientRect().height + 'px'
         this.startTransition(prevHeight)
     }
 
     componentWillLeave(callback) {
         this.callbacks.push(callback)
-        this.element.classList.add('transitioning')
-        this.element.style.height = getComputedStyle(this.element).height
-        this.element.offsetHeight // force repaint
-        this.element.style.transitionProperty = 'height'
-        this.element.style.height = '0px'
+        this.element.current.classList.add('transitioning')
+        this.element.current.style.height = getComputedStyle(this.element.current).height
+        this.element.current.offsetHeight // force repaint
+        this.element.current.style.transitionProperty = 'height'
+        this.element.current.style.height = '0px'
     }
 
     getSnapshotBeforeUpdate() {
         /* Prepare to resize */
         if (this.callbacks.length === 0) {
-            return this.element.getBoundingClientRect().height + 'px'
+            return this.element.current.getBoundingClientRect().height + 'px'
         }
+        return null
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -57,7 +56,7 @@ class SlideDownContent extends React.Component {
         callback && callback()
 
         if (this.callbacks.length === 0) {
-            const prevHeight = snapshot || getComputedStyle(this.element).height
+            const prevHeight = snapshot || getComputedStyle(this.element.current).height
             this.startTransition(prevHeight)
         }
     }
@@ -66,33 +65,33 @@ class SlideDownContent extends React.Component {
         let endHeight = '0px'
 
         if (!this.props.closed) {
-            this.element.classList.remove('closed')
-            this.element.style.height = 'auto'
-            endHeight = getComputedStyle(this.element).height
+            this.element.current.classList.remove('closed')
+            this.element.current.style.height = 'auto'
+            endHeight = getComputedStyle(this.element.current).height
         }
 
         if (parseFloat(endHeight).toFixed(2) !== parseFloat(prevHeight).toFixed(2)) {
-            this.element.classList.add('transitioning')
-            this.element.style.height = prevHeight
-            this.element.offsetHeight // force repaint
-            this.element.style.transitionProperty = 'height'
-            this.element.style.height = endHeight
+            this.element.current.classList.add('transitioning')
+            this.element.current.style.height = prevHeight
+            this.element.current.offsetHeight // force repaint
+            this.element.current.style.transitionProperty = 'height'
+            this.element.current.style.height = endHeight
         }
     }
 
     handleTransitionEnd = (evt) => {
-        if ((evt.target === this.element) && (evt.propertyName === 'height')) {
+        if ((evt.target === this.element.current) && (evt.propertyName === 'height')) {
             const callback = this.callbacks.shift()
             callback && callback()
 
             /* sometimes callback() executes componentWillEnter */
             if (this.callbacks.length === 0) {
-                this.element.classList.remove('transitioning')
-                this.element.style.transitionProperty = 'none'
-                this.element.style.height = this.props.closed ? '0px' : 'auto'
+                this.element.current.classList.remove('transitioning')
+                this.element.current.style.transitionProperty = 'none'
+                this.element.current.style.height = this.props.closed ? '0px' : 'auto'
 
                 if (this.props.closed)
-                    this.element.classList.add('closed')
+                    this.element.current.classList.add('closed')
             }
         }
     }
@@ -103,7 +102,7 @@ class SlideDownContent extends React.Component {
 
         return (
             <div className={className}
-                ref={this.handleRef}
+                ref={this.element}
                 onTransitionEnd={this.handleTransitionEnd}>
                 {this.props.children}
             </div>
@@ -117,7 +116,7 @@ function SlideDownWrapper(props) {
     return childrenArray[0] || null
 }
 
-export function SlideDown(props) {
+function SlideDown(props) {
     const { children, ...attrs } = props
     const hasContent = (children && React.Children.count(children) !== 0)
 
@@ -127,3 +126,12 @@ export function SlideDown(props) {
         </TransitionGroup>
     )
 }
+
+const SlideDownComponent = SlideDown
+
+SlideDown = React.forwardRef((props, ref) => (
+    <SlideDownComponent {...props} forwardedRef={ref} />
+))
+
+export { SlideDown }
+export default SlideDown
