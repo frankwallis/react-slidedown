@@ -1,5 +1,6 @@
 import React from 'react'
-import TransitionGroup from 'react-transition-group/TransitionGroup'
+import { polyfill } from 'react-lifecycles-compat';
+import TransitionGroup from './TransitionGroup/TransitionGroup'
 
 class SlideDownContent extends React.Component {
 
@@ -119,13 +120,15 @@ function SlideDownWrapper(props) {
     return childrenArray[0] || null
 }
 
+const SlideDownContentCompat = polyfill(SlideDownContent);
+
 export function SlideDown(props) {
     const { children, ...attrs } = props
     const hasContent = (children && React.Children.count(children) !== 0)
 
     return (
         <TransitionGroup component={SlideDownWrapper}>
-            {hasContent && <SlideDownContent key={'content'} {...attrs}>{children}</SlideDownContent>}
+            {hasContent && <SlideDownContentCompat key={'content'} {...attrs}>{children}</SlideDownContentCompat>}
         </TransitionGroup>
     )
 }

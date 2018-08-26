@@ -19,7 +19,7 @@
 		"noFallthroughCasesInSwitch": true
 	},
 	"include": [
-		"lib/*.jsx",
+		"lib/**/*.jsx",
 		"example/*.jsx",
 		"test/*.jsx"
 	]
