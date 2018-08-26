@@ -1,6 +1,6 @@
 {
   "name": "react-slidedown",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "Component for animating height during mount/unmount using a CSS transition",
   "main": "lib/slidedown.js",
   "style": "lib/slidedown.css",
@@ -42,12 +42,11 @@
   "dependencies": {
     "chain-function": "^1.0.1",
     "prop-types": "^15.6.2",
-    "react-lifecycles-compat": "^3.0.4",
     "tslib": "^1.9.0"
   },
   "peerDependencies": {
-    "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0"
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0"
   },
   "files": [
     "lib/slidedown.js",

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import chain from 'chain-function';
-import { polyfill } from 'react-lifecycles-compat';
 import { getChildMapping, mergeChildMappings } from './ChildMapping';
 
 const propTypes = {
@@ -236,4 +235,4 @@ class TransitionGroup extends React.Component {
 TransitionGroup.propTypes = propTypes;
 TransitionGroup.defaultProps = defaultProps;
 
-export default polyfill(TransitionGroup);
+export default TransitionGroup;

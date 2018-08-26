@@ -19,8 +19,7 @@ describe('SlideDown', () => {
     beforeEach(() => {
         if (attachTo) {
             ReactDOM.unmountComponentAtNode(attachTo);
-        }
-        else {
+        } else {
             attachTo = document.createElement('div');
             document.body.appendChild(attachTo);
         }
@@ -46,6 +45,13 @@ describe('SlideDown', () => {
             const slidedown = enzyme.render(<SlideDown className={'my-class'}>slideme</SlideDown>);
             expect(slidedown.hasClass('react-slidedown')).to.be.true;
             expect(slidedown.hasClass('my-class')).to.be.true;
+        })
+
+        it('forwards ref to outer div', () => {
+            const ref = React.createRef();
+            ReactDOM.render(<SlideDown ref={ref} className={'my-class'}>slideme</SlideDown>, attachTo);
+            expect(ref.current.tagName).to.equal('DIV');
+            expect(ref.current.classList.contains('my-class')).to.be.true;
         })
     });
 
