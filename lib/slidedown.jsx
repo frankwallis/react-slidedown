@@ -48,6 +48,8 @@ class SlideDownContent extends React.Component {
         /* Prepare to resize */
         if (this.callbacks.length === 0) {
             return this.element.getBoundingClientRect().height + 'px'
+        } else {
+            return null;
         }
     }
 
