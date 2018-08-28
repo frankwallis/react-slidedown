@@ -1,6 +1,6 @@
 {
   "name": "react-slidedown",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Component for animating height during mount/unmount using a CSS transition",
   "main": "lib/slidedown.js",
   "style": "lib/slidedown.css",
@@ -53,8 +53,8 @@
     "lib/slidedown.js",
     "lib/slidedown.css",
     "lib/slidedown.js.map",
-    "lib/TransitionGroup/ChildMappings.js",
-    "lib/TransitionGroup/ChildMappings.js.map",
+    "lib/TransitionGroup/ChildMapping.js",
+    "lib/TransitionGroup/ChildMapping.js.map",
     "lib/TransitionGroup/TransitionGroup.js",
     "lib/TransitionGroup/TransitionGroup.js.map"
   ],
