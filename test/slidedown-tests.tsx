@@ -48,7 +48,7 @@ describe('SlideDown', () => {
         })
 
         it('forwards ref to outer div', () => {
-            const ref = React.createRef();
+            const ref = React.createRef<HTMLDivElement>();
             ReactDOM.render(<SlideDown ref={ref} className={'my-class'}>slideme</SlideDown>, attachTo);
             expect(ref.current.tagName).to.equal('DIV');
             expect(ref.current.classList.contains('my-class')).to.be.true;

@@ -1,7 +1,11 @@
 import React from 'react'
 import Dropdown from './dropdown'
 
-export default class Main extends React.Component {
+interface MainState {
+    open: boolean;
+}
+
+export default class Main extends React.Component<{}, MainState> {
     constructor(props) {
         super(props)
         this.state = { open: false }

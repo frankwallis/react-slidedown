@@ -12,7 +12,7 @@ export function getChildMapping(children) {
     return children;
   }
   let result = {};
-  Children.map(children, child => child)
+  Children.map(children, child => child as React.ReactElement<any>)
     .forEach((child) => {
       result[child.key] = child;
     });

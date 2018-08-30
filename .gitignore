@@ -2,11 +2,12 @@
 node_modules/
 coverage/
 example/*.js
+example/*.d.ts
 example/*.js.map
-lib/*.js
-lib/*.js.map
-lib/TransitionGroup/*.js
-lib/TransitionGroup/*.js.map
+lib/**/*.js
+lib/**/*.d.ts
+lib/**/*.js.map
 test/*.js
+test/*.d.ts
 test/*.js.map
 tmp/

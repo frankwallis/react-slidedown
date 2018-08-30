@@ -1,26 +1,21 @@
 {
 	"compilerOptions": {
-		"lib": [
-			"es5",
-			"dom"
-		],
 		"target": "es5",
 		"module": "commonjs",
+		"lib": [
+			"dom",
+			"es5",
+			"es2015.promise"
+		],
 		"esModuleInterop": true,
 		"importHelpers": true,
 		"removeComments": true,
 		"moduleResolution": "node",
 		"sourceMap": true,
+		"declaration": true,
 		"jsx": "react",
-		"allowJs": true,
-		"noResolve": true,
 		"noImplicitReturns": true,
 		"noImplicitThis": false,
 		"noFallthroughCasesInSwitch": true
-	},
-	"include": [
-		"lib/**/*.jsx",
-		"example/*.jsx",
-		"test/*.jsx"
-	]
+	}
 }

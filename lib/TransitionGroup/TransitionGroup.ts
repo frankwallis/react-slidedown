@@ -1,22 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Key } from 'react';
 import chain from 'chain-function';
 import { getChildMapping, mergeChildMappings } from './ChildMapping';
 
-const propTypes = {
-  component: PropTypes.any,
-  childFactory: PropTypes.func,
-  children: PropTypes.node,
-};
+interface TransitionGroupProps {
+  component: any;
+  childFactory: any;
+}
 
-const defaultProps = {
-  component: 'span',
-  childFactory: child => child,
-};
+interface TransitionGroupState {
+  children: Record<Key, any>;
+}
 
+export default class TransitionGroup extends React.Component<TransitionGroupProps, TransitionGroupState> {
+  static defaultProps = {
+    component: 'span',
+    childFactory: child => child,
+  };
 
-class TransitionGroup extends React.Component {
-  static displayName = 'TransitionGroup';
+  private childRefs: Record<Key, any>;
+  private currentlyTransitioningKeys: Record<Key, boolean>;
+  private keysToEnter: Key[];
+  private keysToLeave: Key[];
 
   constructor(props, context) {
     super(props, context);
@@ -52,7 +56,7 @@ class TransitionGroup extends React.Component {
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(_prevProps, prevState) {
     let nextChildMapping = getChildMapping(this.props.children);
     let prevChildMapping = prevState.children;
 
@@ -164,7 +168,7 @@ class TransitionGroup extends React.Component {
       this.keysToEnter.push(key);
     } else {
       this.setState((state) => {
-        let newChildren = Object.assign({}, state.children);
+        let newChildren = { ...state.children };
         delete newChildren[key];
         return { children: newChildren };
       });
@@ -213,15 +217,8 @@ class TransitionGroup extends React.Component {
     }
 
     // Do not forward TransitionGroup props to primitive DOM nodes
-    let props = Object.assign({}, this.props);
-    delete props.transitionLeave;
-    delete props.transitionName;
-    delete props.transitionAppear;
-    delete props.transitionEnter;
+    let props = { ...this.props };
     delete props.childFactory;
-    delete props.transitionLeaveTimeout;
-    delete props.transitionEnterTimeout;
-    delete props.transitionAppearTimeout;
     delete props.component;
 
     return React.createElement(
@@ -231,8 +228,3 @@ class TransitionGroup extends React.Component {
     );
   }
 }
-
-TransitionGroup.propTypes = propTypes;
-TransitionGroup.defaultProps = defaultProps;
-
-export default TransitionGroup;

@@ -1,14 +1,21 @@
 import React from 'react'
 import TransitionGroup from './TransitionGroup/TransitionGroup'
 
-class SlideDownContent extends React.Component {
+interface SlideDownContentProps extends SlideDownProps {
+    forwardedRef: React.RefObject<HTMLDivElement>
+}
+
+class SlideDownContent extends React.Component<SlideDownContentProps> {
 
     static defaultProps = {
         transitionOnAppear: true,
         closed: false
     }
 
-    constructor(props) {
+    private outerRef: React.RefObject<HTMLDivElement>
+    private callbacks: Function[]
+
+    constructor(props: SlideDownContentProps) {
         super(props)
         this.outerRef = props.forwardedRef || React.createRef()
         this.callbacks = []
@@ -20,7 +27,7 @@ class SlideDownContent extends React.Component {
         }
     }
 
-    componentWillAppear(callback) {
+    componentWillAppear(callback: Function) {
         if (this.props.transitionOnAppear) {
             this.callbacks.push(callback)
             this.startTransition('0px')
@@ -30,13 +37,13 @@ class SlideDownContent extends React.Component {
         }
     }
 
-    componentWillEnter(callback) {
+    componentWillEnter(callback: Function) {
         this.callbacks.push(callback)
         const prevHeight = this.outerRef.current.getBoundingClientRect().height + 'px'
         this.startTransition(prevHeight)
     }
 
-    componentWillLeave(callback) {
+    componentWillLeave(callback: Function) {
         this.callbacks.push(callback)
         this.outerRef.current.classList.add('transitioning')
         this.outerRef.current.style.height = getComputedStyle(this.outerRef.current).height
@@ -50,11 +57,11 @@ class SlideDownContent extends React.Component {
         if (this.callbacks.length === 0) {
             return this.outerRef.current.getBoundingClientRect().height + 'px'
         } else {
-            return null;
+            return null
         }
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(_prevProps, _prevState, snapshot: string | null) {
         /* Terminate any active transition */
         const callback = this.callbacks.shift()
         callback && callback()
@@ -65,7 +72,7 @@ class SlideDownContent extends React.Component {
         }
     }
 
-    startTransition(prevHeight) {
+    startTransition(prevHeight: string) {
         let endHeight = '0px'
 
         if (!this.props.closed) {
@@ -83,7 +90,7 @@ class SlideDownContent extends React.Component {
         }
     }
 
-    handleTransitionEnd = (evt) => {
+    handleTransitionEnd = (evt: React.TransitionEvent) => {
         if ((evt.target === this.outerRef.current) && (evt.propertyName === 'height')) {
             const callback = this.callbacks.shift()
             callback && callback()
@@ -116,23 +123,29 @@ class SlideDownContent extends React.Component {
 }
 
 /* From React docs this removes the need for another wrapper div */
-function SlideDownWrapper(props) {
+function TransitionGroupWrapper(props) {
     const childrenArray = React.Children.toArray(props.children)
     return childrenArray[0] || null
 }
 
-function SlideDownComponent(props) {
+const SlideDownComponent: React.SFC<SlideDownContentProps> = (props) => {
     const { children, ...attrs } = props
     const hasContent = (children && React.Children.count(children) !== 0)
 
     return (
-        <TransitionGroup component={SlideDownWrapper}>
+        <TransitionGroup component={TransitionGroupWrapper}>
             {hasContent && <SlideDownContent key={'content'} {...attrs}>{children}</SlideDownContent>}
         </TransitionGroup>
     )
 }
 
-export const SlideDown = React.forwardRef((props, ref) => (
+interface SlideDownProps {
+    className?: string
+    transitionOnAppear?: boolean
+    closed?: boolean
+}
+
+export const SlideDown = React.forwardRef((props: SlideDownProps, ref: React.RefObject<HTMLDivElement>) => (
     <SlideDownComponent {...props} forwardedRef={ref} />
 ))
 

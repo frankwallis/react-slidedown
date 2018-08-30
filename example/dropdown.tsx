@@ -1,7 +1,14 @@
 import React from 'react'
 import { SlideDown } from '../lib/slidedown'
 
-export default class Dropdown extends React.Component {
+interface DropdownProps {
+    open: boolean;
+    overlay: boolean;
+    alwaysRender: boolean;
+    maxItems: number;
+}
+
+export default class Dropdown extends React.Component<DropdownProps> {
     render() {
         let className = 'dropdown-slidedown'
         let caption = this.props.open ? 'Down' : 'Up'
@@ -29,7 +36,7 @@ export default class Dropdown extends React.Component {
     }
 
     renderList() {
-        const count = Math.trunc(Math.random() * this.props.maxItems) + 5
+        const count = Math.floor(Math.random() * this.props.maxItems) + 5
         const items = []
         for (var idx = 0; idx < count; idx++)
             items.push(<li key={idx} className={'pure-menu-item'}><span>{'Item ' + idx}</span></li>)

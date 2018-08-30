@@ -4,6 +4,8 @@ React component which uses CSS to animate a child from its current height to ```
 
 [![build status](https://secure.travis-ci.org/frankwallis/react-slidedown.png?branch=master)](http://travis-ci.org/frankwallis/react-slidedown)
 
+[Live Demo](https://ykxm1vz5vv.codesandbox.io/)
+
 ## Overview ##
 
 CSS does not currently support animating element height to ```height: auto``` and so *normally* javascript is used to achieve this effect.

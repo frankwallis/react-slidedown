@@ -1,10 +1,11 @@
 {
   "name": "react-slidedown",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Component for animating height during mount/unmount using a CSS transition",
   "main": "lib/slidedown.js",
   "style": "lib/slidedown.css",
   "scripts": {
+    "clean": "rimraf '{example,lib,test}/**/*.{js,js.map,d.ts}'",
     "test": "npm run build && karma start --single-run",
     "test:watch": "karma start",
     "test:start": "concurrently \"npm run build:watch\" \"npm run test:watch\" --kill-others",
@@ -19,8 +20,9 @@
   "devDependencies": {
     "@types/chai": "^4.1.3",
     "@types/enzyme": "^3.1.10",
+    "@types/mocha": "^5.2.5",
     "@types/node": "^8.10.17",
-    "@types/react": "16.0.16",
+    "@types/react": "^16.0.16",
     "@types/react-dom": "^16.0.5",
     "browserify": "^16.2.2",
     "chai": "^4.1.2",
@@ -36,12 +38,12 @@
     "purecss": "^1.0.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
-    "typescript": "^2.8.3",
+    "rimraf": "^2.6.2",
+    "typescript": "^3.0.0",
     "watchify": "^3.11.0"
   },
   "dependencies": {
     "chain-function": "^1.0.1",
-    "prop-types": "^15.6.2",
     "tslib": "^1.9.0"
   },
   "peerDependencies": {
@@ -49,12 +51,16 @@
     "react-dom": "^16.3.0"
   },
   "files": [
-    "lib/slidedown.js",
     "lib/slidedown.css",
+    "lib/slidedown.js",
+    "lib/slidedown.d.ts",
     "lib/slidedown.js.map",
+    "lib/TransitionGroup/LICENSE",
     "lib/TransitionGroup/ChildMapping.js",
+    "lib/TransitionGroup/ChildMapping.d.ts",
     "lib/TransitionGroup/ChildMapping.js.map",
     "lib/TransitionGroup/TransitionGroup.js",
+    "lib/TransitionGroup/TransitionGroup.d.ts",
     "lib/TransitionGroup/TransitionGroup.js.map"
   ],
   "repository": "frankwallis/react-slidedown",
