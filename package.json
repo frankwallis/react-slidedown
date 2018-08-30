@@ -1,6 +1,6 @@
 {
   "name": "react-slidedown",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Component for animating height during mount/unmount using a CSS transition",
   "main": "lib/slidedown.js",
   "style": "lib/slidedown.css",
@@ -51,17 +51,7 @@
     "react-dom": "^16.3.0"
   },
   "files": [
-    "lib/slidedown.css",
-    "lib/slidedown.js",
-    "lib/slidedown.d.ts",
-    "lib/slidedown.js.map",
-    "lib/TransitionGroup/LICENSE",
-    "lib/TransitionGroup/ChildMapping.js",
-    "lib/TransitionGroup/ChildMapping.d.ts",
-    "lib/TransitionGroup/ChildMapping.js.map",
-    "lib/TransitionGroup/TransitionGroup.js",
-    "lib/TransitionGroup/TransitionGroup.d.ts",
-    "lib/TransitionGroup/TransitionGroup.js.map"
+    "lib/"
   ],
   "repository": "frankwallis/react-slidedown",
   "keywords": [
