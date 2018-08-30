@@ -3,6 +3,7 @@
   "version": "2.0.3",
   "description": "Component for animating height during mount/unmount using a CSS transition",
   "main": "lib/slidedown.js",
+  "types": "lib/slidedown.d.ts",
   "style": "lib/slidedown.css",
   "scripts": {
     "clean": "rimraf '{example,lib,test}/**/*.{js,js.map,d.ts}'",
