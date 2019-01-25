@@ -2,6 +2,6 @@ dist: trusty
 sudo: required
 language: node_js
 node_js:
-  - "6.0"
+  - "8.12"
 addons:
   chrome: stable
