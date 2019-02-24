@@ -25,7 +25,7 @@ describe('SlideDown', () => {
         }
     });
 
-    describe('Simple rendering', () => {
+    describe('simple rendering', () => {
         it('renders no children when empty', () => {
             const slidedown = enzyme.render(<SlideDown></SlideDown>);
             expect(slidedown.children()).to.have.length(0);
@@ -47,11 +47,19 @@ describe('SlideDown', () => {
             expect(slidedown.hasClass('my-class')).to.be.true;
         })
 
-        it('forwards ref to outer div', () => {
+        it('forwards object ref to outer div', () => {
             const ref = React.createRef<HTMLDivElement>();
             ReactDOM.render(<SlideDown ref={ref} className={'my-class'}>slideme</SlideDown>, attachTo);
             expect(ref.current.tagName).to.equal('DIV');
             expect(ref.current.classList.contains('my-class')).to.be.true;
+        })
+
+        it('forwards function ref to outer div', () => {
+            let current: HTMLDivElement | null = null;
+            const refFn = ref => current = ref;
+            ReactDOM.render(<SlideDown ref={refFn} className={'my-class'}>slideme</SlideDown>, attachTo);
+            expect(current.tagName).to.equal('DIV');
+            expect(current.classList.contains('my-class')).to.be.true;
         })
     });
 
