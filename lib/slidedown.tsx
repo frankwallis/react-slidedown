@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef, Component } from 'react'
 
 interface SlideDownContentProps extends SlideDownProps {
     forwardedRef: React.Ref<HTMLDivElement> | null
@@ -9,7 +9,7 @@ interface SlideDownContentState {
     childrenLeaving: boolean
 }
 
-class SlideDownContent extends React.Component<SlideDownContentProps, SlideDownContentState> {
+class SlideDownContent extends Component<SlideDownContentProps, SlideDownContentState> {
 
     static defaultProps = {
         transitionOnAppear: true,
@@ -139,7 +139,7 @@ interface SlideDownProps {
     transitionOnAppear?: boolean
 }
 
-export const SlideDown = React.forwardRef((props: SlideDownProps, ref: React.Ref<HTMLDivElement>) => (
+export const SlideDown = forwardRef((props: SlideDownProps, ref: React.Ref<HTMLDivElement>) => (
     <SlideDownContent {...props} forwardedRef={ref} />
 ))
 
