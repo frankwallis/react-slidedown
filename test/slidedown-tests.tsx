@@ -47,6 +47,12 @@ describe('SlideDown', () => {
             expect(slidedown.hasClass('my-class')).to.be.true;
         })
 
+        it('adds other props to container div', () => {
+            const ref = React.createRef<HTMLDivElement>();
+            ReactDOM.render(<SlideDown ref={ref} id={'my-id'}>slideme</SlideDown>, attachTo);
+            expect(ref.current.id).to.equal('my-id');
+        })
+
         it('forwards object ref to outer div', () => {
             const ref = React.createRef<HTMLDivElement>();
             ReactDOM.render(<SlideDown ref={ref} className={'my-class'}>slideme</SlideDown>, attachTo);
@@ -63,7 +69,7 @@ describe('SlideDown', () => {
         })
     });
 
-    describe('children', () => {        
+    describe('children', () => {
         it('transitions when children are added', async () => {
             const slidedown = enzyme.mount(<SlideDown className={'test-slidedown'}></SlideDown>, { attachTo });
             slidedown.setProps({ children: <div className={'test-content'} /> });
@@ -87,7 +93,7 @@ describe('SlideDown', () => {
             await pause(50);
             const midHeight = slidedown.find('.react-slidedown').getDOMNode().clientHeight;
             expect(midHeight).to.be.lessThan(18);
-            
+
             slidedown.setProps({ children: null });
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.equal(midHeight);
             await pause(50);
@@ -97,7 +103,7 @@ describe('SlideDown', () => {
         })
     });
 
-    describe('transitionOnAppear', () => {        
+    describe('transitionOnAppear', () => {
         it('transitions on mounting', async () => {
             const slidedown = enzyme.mount(<SlideDown className={'test-slidedown'}><div className={'test-content'} /></SlideDown>, { attachTo });
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.equal(0);
@@ -111,7 +117,7 @@ describe('SlideDown', () => {
         })
     });
 
-    describe('closed property', () => {        
+    describe('closed property', () => {
         it('sets closed class on container when mounted with closed property set', () => {
             const slidedown = enzyme.mount(<SlideDown closed={true}><div className={'findme'} /></SlideDown>, { attachTo });
             expect(slidedown.find('.react-slidedown').getDOMNode().classList.contains('closed')).to.be.true;
