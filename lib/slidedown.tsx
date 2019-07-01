@@ -44,7 +44,7 @@ class SlideDownContent extends Component<SlideDownContentProps, SlideDownContent
     }
 
     componentDidMount() {
-        if (this.props.closed || !this.props.children) {
+        if (this.outerRef && (this.props.closed || !this.props.children)) {
             this.outerRef.classList.add('closed')
             this.outerRef.style.height = '0px'
         } else if (this.props.transitionOnAppear) {
@@ -83,18 +83,20 @@ class SlideDownContent extends Component<SlideDownContentProps, SlideDownContent
     private startTransition(prevHeight: string) {
         let endHeight = '0px'
 
-        if (!this.props.closed && !this.state.childrenLeaving && this.state.children) {
-            this.outerRef.classList.remove('closed')
-            this.outerRef.style.height = 'auto'
-            endHeight = getComputedStyle(this.outerRef).height
-        }
-
-        if (parseFloat(endHeight).toFixed(2) !== parseFloat(prevHeight).toFixed(2)) {
-            this.outerRef.classList.add('transitioning')
-            this.outerRef.style.height = prevHeight
-            this.outerRef.offsetHeight // force repaint
-            this.outerRef.style.transitionProperty = 'height'
-            this.outerRef.style.height = endHeight
+        if(this.outerRef) {
+            if (!this.props.closed && !this.state.childrenLeaving && this.state.children) {
+                this.outerRef.classList.remove('closed')
+                this.outerRef.style.height = 'auto'
+                endHeight = getComputedStyle(this.outerRef).height
+            }
+    
+            if (parseFloat(endHeight).toFixed(2) !== parseFloat(prevHeight).toFixed(2)) {
+                this.outerRef.classList.add('transitioning')
+                this.outerRef.style.height = prevHeight
+                this.outerRef.offsetHeight // force repaint
+                this.outerRef.style.transitionProperty = 'height'
+                this.outerRef.style.height = endHeight
+            }
         }
     }
 
