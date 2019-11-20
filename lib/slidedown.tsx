@@ -122,22 +122,24 @@ class SlideDownContent extends Component<SlideDownContentProps, SlideDownContent
     }
 
     render() {
-        const { children, className, closed, transitionOnAppear, forwardedRef, ...rest } = this.props
+        const { as = 'div', children, className, closed, transitionOnAppear, forwardedRef, ...rest } = this.props
         const containerClassName = className ? 'react-slidedown ' + className : 'react-slidedown'
 
-        return (
-            <div
-                ref={this.handleRef}
-                className={containerClassName}
-                onTransitionEnd={this.handleTransitionEnd}
-                {...rest}>
-                {this.state.children}
-            </div>
-        )
+        return React.createElement(
+            as,
+            {
+                ref: this.handleRef,
+                className: containerClassName,
+                onTransitionEnd: this.handleTransitionEnd,
+                ...rest
+            },
+            this.state.children
+        );
     }
 }
 
 interface SlideDownProps extends React.HTMLAttributes<HTMLDivElement> {
+    as?: keyof JSX.IntrinsicElements | React.ComponentType<any>;
     closed?: boolean
     transitionOnAppear?: boolean
 }
