@@ -51,9 +51,11 @@ In the example above the css file needed by react-slidedown is included via Java
 
 | Property | Type | Default | Required? | Description |
 |:---|:---|:---|:---:|:---|
-| closed | Boolean | `false` | No | If `false` renders in closed mode, if `true` then slides down |
+| children | Children | | No | When provided the component opens and when removed the component closes |
+| closed | Boolean | | No | If `true` the component will close even if children are provided |
 | className | String | | No | CSS class name to be used in addition to the `react-slidedown` class name |
-| transitionOnAppear | Boolean | `true` | No | Do a transition animation on [`componentWillAppear()`](https://reactjs.org/docs/animation.html#componentwillappear) |
+| transitionOnAppear | Boolean | `true` | No | Do a transition animation on initial mount |
+| as | String | `div` | No | The outermost Element type to render |
 
 ## Example ##
 
