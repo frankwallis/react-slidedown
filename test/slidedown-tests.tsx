@@ -75,7 +75,7 @@ describe('SlideDown', () => {
             const slidedown = enzyme.mount(<SlideDown className={'test-slidedown'}></SlideDown>, { attachTo })
             slidedown.setProps({ children: <div className={'test-content'} /> })
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.equal(0)
-            await pause(100)
+            await pause(110)
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.equal(18)
         })
 
@@ -84,7 +84,7 @@ describe('SlideDown', () => {
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.equal(18)
             slidedown.setProps({ children: null })
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.equal(18)
-            await pause(100)
+            await pause(110)
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.equal(0)
         })
 
@@ -99,7 +99,7 @@ describe('SlideDown', () => {
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.equal(midHeight)
             await pause(50)
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.be.lessThan(midHeight)
-            await pause(50)
+            await pause(60)
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.equal(0)
         })
     })
@@ -108,7 +108,7 @@ describe('SlideDown', () => {
         it('transitions on mounting', async () => {
             const slidedown = enzyme.mount(<SlideDown className={'test-slidedown'}><div className={'test-content'} /></SlideDown>, { attachTo })
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.equal(0)
-            await pause(100)
+            await pause(110)
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.equal(18)
         })
 
@@ -134,7 +134,7 @@ describe('SlideDown', () => {
         it('does not transition on mounting when closed property is set', async () => {
             const slidedown = enzyme.mount(<SlideDown className={'test-slidedown'} closed={true}><div className={'test-content'} /></SlideDown>, { attachTo })
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.equal(0)
-            await pause(100)
+            await pause(110)
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.equal(0)
         })
 
@@ -143,7 +143,7 @@ describe('SlideDown', () => {
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.equal(0)
             slidedown.setProps({ closed: false })
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.equal(0)
-            await pause(100)
+            await pause(110)
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.equal(18)
         })
 
@@ -152,7 +152,7 @@ describe('SlideDown', () => {
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.equal(18)
             slidedown.setProps({ closed: true })
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.equal(18)
-            await pause(100)
+            await pause(110)
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.equal(0)
         })
 
@@ -166,7 +166,7 @@ describe('SlideDown', () => {
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.equal(midHeight)
             await pause(50)
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.be.lessThan(midHeight)
-            await pause(50)
+            await pause(60)
             expect(slidedown.find('.react-slidedown').getDOMNode().clientHeight).to.equal(0)
         })
     })
