@@ -5,7 +5,7 @@ interface DropdownProps {
     open: boolean;
     overlay: boolean;
     alwaysRender: boolean;
-    maxItems: number;
+    itemCount: number;
 }
 
 export default class Dropdown extends React.Component<DropdownProps> {
@@ -29,16 +29,15 @@ export default class Dropdown extends React.Component<DropdownProps> {
             <div className={'dropdown-container'}>
                 <span className={'narrative'}>{caption}</span>
                 <SlideDown className={'pure-menu pure-menu-scrollable ' + className} closed={closed}>
-                    {render && this.renderList()}
+                    {render && this.renderList(this.props.itemCount)}
                 </SlideDown>
             </div>
         )
     }
 
-    renderList() {
-        const count = Math.floor(Math.random() * this.props.maxItems) + 5
+    renderList(itemCount: number) {
         const items = []
-        for (var idx = 0; idx < count; idx++)
+        for (var idx = 0; idx < itemCount; idx++)
             items.push(<li key={idx} className={'pure-menu-item'}><span>{'Item ' + idx}</span></li>)
         return <div><ul className={'pure-menu-list dropdown-list'}>{items}</ul></div>
     }
