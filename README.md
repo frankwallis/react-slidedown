@@ -52,7 +52,7 @@ In the example above the css file needed by react-slidedown is included via Java
 | :--------------------- | :------- | :---------------- | :-------: | :---------------------------------------------------------------------- | ---------------------------------------- |
 | as                     | String   | `div`             |     No    | The outermost Element type to render                                    |                                          |
 | children               | Children |                   |     No    | When provided the component opens and when removed the component closes |                                          |
-| className              | String   | `react-slidedown` |     No    |                                                                         | CSS class name to be used on the element |
+| className              | String   | `react-slidedown` |     No    | CSS class name to be used on the element                                | 
 | closed                 | Boolean  |                   |     No    | If `true` the component will close even if children are provided        |                                          |
 | closedClassName        | String   | `closed`          |     No    | CSS class name to be used on the element when closed                    |                                          |
 | transitioningClassName | String   | `transitioning`   |     No    | CSS class name to be used on the element while in transition            |                                          |
