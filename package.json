@@ -48,8 +48,8 @@
     "tslib": "^1.9.0"
   },
   "peerDependencies": {
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0"
+    "react": "^16.3.0 || 17",
+    "react-dom": "^16.3.0 || 17"
   },
   "files": [
     "lib/**/*.js",
