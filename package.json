@@ -55,7 +55,8 @@
     "lib/**/*.js",
     "lib/**/*.js.map",
     "lib/**/*.css",
-    "lib/**/*.d.ts"
+    "lib/**/*.d.ts",
+    "lib/**/*.tsx"
   ],
   "repository": "frankwallis/react-slidedown",
   "keywords": [
