@@ -73,7 +73,7 @@ npm start
 
 You can customise the transition used for the animation by overriding styles on the ```SlideDown``` component:
 
-```cs
+```css
 .react-slidedown.my-dropdown-slidedown {
     transition-duration: 1.2s;
     transition-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1);
@@ -82,7 +82,7 @@ You can customise the transition used for the animation by overriding styles on 
 
 The default values used are:
 
-```cs
+```css
 .react-slidedown {
     transition-duration: .5s;
     transition-timing-function: ease-in-out;
