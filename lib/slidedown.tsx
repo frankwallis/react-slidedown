@@ -46,7 +46,7 @@ class SlideDownContent extends Component<SlideDownContentProps, SlideDownContent
     componentDidMount() {
         if (this.outerRef) {
             if (this.props.closed || !this.props.children) {
-                this.outerRef.classList.add('closed')
+                this.outerRef.classList.add(this.closedClassName)
                 this.outerRef.style.height = '0px'
             } else if (this.props.transitionOnAppear) {
                 this.startTransition('0px')
@@ -87,13 +87,13 @@ class SlideDownContent extends Component<SlideDownContentProps, SlideDownContent
         let endHeight = '0px'
 
         if (!this.props.closed && !this.state.childrenLeaving && this.state.children) {
-            this.outerRef.classList.remove('closed')
+            this.outerRef.classList.remove(this.closedClassName)
             this.outerRef.style.height = 'auto'
             endHeight = getComputedStyle(this.outerRef).height
         }
 
         if (parseFloat(endHeight).toFixed(2) !== parseFloat(prevHeight).toFixed(2)) {
-            this.outerRef.classList.add('transitioning')
+            this.outerRef.classList.add(this.transitioningClassName)
             this.outerRef.style.height = prevHeight
             this.outerRef.offsetHeight // force repaint
             this.outerRef.style.transitionProperty = 'height'
@@ -102,12 +102,12 @@ class SlideDownContent extends Component<SlideDownContentProps, SlideDownContent
     }
 
     private endTransition() {
-        this.outerRef.classList.remove('transitioning')
+        this.outerRef.classList.remove(this.transitioningClassName)
         this.outerRef.style.transitionProperty = 'none'
         this.outerRef.style.height = this.props.closed ? '0px' : 'auto'
 
         if (this.props.closed || !this.state.children) {
-            this.outerRef.classList.add('closed')
+            this.outerRef.classList.add(this.closedClassName)
         }
     }
 
@@ -122,8 +122,10 @@ class SlideDownContent extends Component<SlideDownContentProps, SlideDownContent
     }
 
     render() {
-        const { as = 'div', children, className, closed, transitionOnAppear, forwardedRef, ...rest } = this.props
-        const containerClassName = className ? 'react-slidedown ' + className : 'react-slidedown'
+        const { as = 'div', children, className, transitioningClassName, closedClassName, closed, transitionOnAppear, forwardedRef, ...rest } = this.props
+        const containerClassName = className ? className : 'react-slidedown';
+        this.transitioningClassName = transitioningClassName ? transitioningClassName : 'transitioning';
+        this.closedClassName = closedClassName ? closedClassName : 'closed';
 
         return React.createElement(
             as,
